@@ -1,0 +1,10 @@
+wp-thumbhash-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+wp-thumbhash-field img {
+  display: block;
+  height: 30px;
+  width: auto;
+}

@@ -5,8 +5,8 @@ namespace Hirasso\WPThumbhash;
 use Exception;
 use WP_Image_Editor;
 use WP_Error;
-
 use Thumbhash\Thumbhash as ThumbhashLib;
+
 use function Thumbhash\extract_size_and_pixels_with_gd;
 use function Thumbhash\extract_size_and_pixels_with_imagick;
 
@@ -42,7 +42,7 @@ class Thumbhash
     /**
      * Decode a stored hash
      */
-    public static function decode(string $storedHash): string
+    public static function decode(string $storedHash): ?string
     {
         if (!$storedHash) {
             return null;

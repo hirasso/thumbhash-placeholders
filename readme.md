@@ -4,8 +4,6 @@ A WordPress plugin to enhance your images with [thumbhash](https://evanw.github.
 
 ## Installation
 
-### Via Composer (recommended):
-
 1. Install the plugin:
 
 ```shell
@@ -18,3 +16,6 @@ composer require hirasso/wp-thumbhash
 wp plugin activate wp-thumbhash
 ```
 
+## Usage
+
+Every time you upload an image, a matching placeholder will be generated automatically.
