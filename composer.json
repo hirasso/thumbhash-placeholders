@@ -17,5 +17,8 @@
     "minimum-stability": "dev",
     "require": {
         "srwiez/thumbhash": "dev-master"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "dev-master"
     }
 }
