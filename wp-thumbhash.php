@@ -18,11 +18,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('WP_THUMBHASH_PLUGIN_URI', untrailingslashit(plugin_dir_url(__FILE__)));
-define('WP_THUMBHASH_PLUGIN_DIR', untrailingslashit(__DIR__));
-
 if (is_readable(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 
 Plugin::init();
+
+/**
+ * API functions
+ */
+if (!function_exists('get_wp_thumbhash_url')) {
+    function get_wp_thumbhash_url(int|WP_Post $post): ?string {
+        return Plugin::getThumbhashURL($post);
+    }
+}

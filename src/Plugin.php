@@ -8,10 +8,11 @@ namespace Hirasso\WPThumbhash;
 
 use WP_CLI;
 use WP_Query;
+use WP_Post;
 
 class Plugin
 {
-    private const META_KEY = '_thumbhash_placeholder';
+    private const META_KEY = '_wp_thumbhash';
 
     /**
      * Initialize the plugin
@@ -36,12 +37,24 @@ class Plugin
         if (!wp_attachment_is_image($attachmentID)) {
             return false;
         }
-        $thumbhash = Thumbhash::fromAttachment($attachmentID);
+        $thumbhash = Thumbhash::encode($attachmentID);
         if ($thumbhash) {
             update_post_meta($attachmentID, static::META_KEY, $thumbhash);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Get the thumbhash URL for an attachment
+     */
+    public static function getThumbhashURL(int|WP_Post $post): ?string {
+        $attachmentID = $post->ID ?? $post;
+        if (!wp_attachment_is_image($attachmentID)) {
+            return null;
+        }
+        $hash = get_post_meta($attachmentID, static::META_KEY, true);
+        return Thumbhash::decode($hash);
     }
 
     /**
