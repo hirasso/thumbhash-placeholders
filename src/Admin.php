@@ -6,6 +6,7 @@
 
 namespace Hirasso\WPThumbhash;
 
+use Hirasso\WPThumbhash\Enums\AdminContext;
 use WP_Post;
 
 class Admin
@@ -56,7 +57,7 @@ class Admin
         $fields['wp-thumbhash-field'] = [
             'label' => __('Placeholder'),
             'input'  => 'html',
-            'html' => static::renderAttachmentField($attachment->ID),
+            'html' => static::renderAttachmentField($attachment->ID, AdminContext::INITIAL),
         ];
 
         return $fields;
@@ -65,7 +66,7 @@ class Admin
     /**
      * Render the attachment field
      */
-    private static function renderAttachmentField(int $id): string
+    private static function renderAttachmentField(int $id, AdminContext $context): string
     {
         $thumbhashURL = Plugin::getThumbhashURL($id);
         $buttonLabel = $thumbhashURL ? __('Regenerate') : __('Generate');
@@ -74,13 +75,18 @@ class Admin
 
         <wp-thumbhash-field data-id="<?= $id ?>">
             <?php if ($thumbhashURL): ?>
-                <img class="wp-thumbhash_image" src="<?= $thumbhashURL ?>" alt="Thumbhash placeholder">
+                <img class="wp-thumbhash_image" title="get_wp_thumbhash_url(<?= $id ?>)" src="<?= $thumbhashURL ?>" alt="Thumbhash placeholder">
             <?php endif; ?>
 
             <button data-wp-thumbhash-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
+
+            <?php if ($context === AdminContext::REGENERATE): ?>
+                <i aria-hidden="true" data-wp-thumbhash-regenerated></i>
+            <?php endif; ?>
+
         </wp-thumbhash-field>
 
-        <?php return ob_get_clean();
+<?php return ob_get_clean();
     }
 
     public static function generateThumbhashFromAdmin(): void
@@ -93,7 +99,7 @@ class Admin
         }
         Plugin::generateThumbhash($id);
         wp_send_json_success([
-           'html' => static::renderAttachmentField($id),
+            'html' => static::renderAttachmentField($id, AdminContext::REGENERATE),
         ]);
     }
 }

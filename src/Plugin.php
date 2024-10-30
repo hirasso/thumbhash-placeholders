@@ -4,6 +4,8 @@
  * https://rassohilber.com
  */
 
+declare(strict_types=1);
+
 namespace Hirasso\WPThumbhash;
 
 use WP_CLI;

@@ -30,8 +30,8 @@ Plugin::init();
 /**
  * API functions
  */
-if (!function_exists('get_wp_thumbhash_url')) {
-    function get_wp_thumbhash_url(int|WP_Post $post): ?string
+if (!function_exists('wp_thumbhash_get_data_url')) {
+    function wp_thumbhash_get_data_url(int|WP_Post $post): ?string
     {
         return Plugin::getThumbhashURL($post);
     }

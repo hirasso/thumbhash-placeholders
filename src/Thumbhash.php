@@ -3,6 +3,7 @@
 namespace Hirasso\WPThumbhash;
 
 use Exception;
+use Hirasso\WPThumbhash\Enums\ImageDriver;
 use WP_Image_Editor;
 use WP_Error;
 use Thumbhash\Thumbhash as ThumbhashLib;

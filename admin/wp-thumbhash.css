@@ -5,6 +5,32 @@ wp-thumbhash-field {
 }
 wp-thumbhash-field img {
   display: block;
-  height: 30px;
+  height: 26px;
   width: auto;
+  border-radius: 3px;
+  overflow: hidden;
+}
+@keyframes disappear {
+  to {
+    opacity: 0;
+  }
+}
+[data-wp-thumbhash-regenerated] {
+  background: hsl(168, 100%, 50%);
+  --size: 1.3rem;
+  display: block;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-style: normal;
+  border: 1px solid rgb(0 0 0 / 0.2);
+  animation: disappear 0.5s 1s linear;
+  animation-fill-mode: forwards;
+}
+[data-wp-thumbhash-regenerated]::before {
+  content: "✔︎";
 }
