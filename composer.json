@@ -1,0 +1,21 @@
+{
+    "name": "hirasso/wp-thumbhash",
+    "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Hirasso\\WPThumbhash\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rasso Hilber",
+            "email": "mail@rassohilber.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "srwiez/thumbhash": "dev-master"
+    }
+}
