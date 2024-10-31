@@ -1,0 +1,15 @@
+# Define git attributes per path
+# https://git-scm.com/docs/gitattributes
+
+# Exclude tests and docs from dist archives
+/.editorconfig                      export-ignore
+/.gitattributes                     export-ignore
+/.github                            export-ignore
+/.gitignore                         export-ignore
+/.phpcsfixer.config.php             export-ignore
+/.lintstagedrc.js                   export-ignore
+/.husky                             export-ignore
+/vendor                             export-ignore
+/pnpm-lock.yaml                     export-ignore
+/package.json                       export-ignore
+/test                               export-ignore
