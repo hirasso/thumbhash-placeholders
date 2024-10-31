@@ -16,9 +16,19 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "srwiez/thumbhash": "dev-master"
+        "srwiez/thumbhash": "dev-master",
+        "sniccowp/php-scoper-wordpress-excludes": "dev-master"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "dev-master"
+    },
+    "scripts": {
+        "create-scoped-release": [
+            "rm -rf vendor wp-thumbhash-scoped",
+            "composer install --no-dev --prefer-dist",
+            "php scoper.phar add-prefix --force --quiet",
+            "composer dump-autoload --working-dir build --classmap-authoritative",
+            "mv build wp-thumbhash-scoped"
+        ]
     }
 }
