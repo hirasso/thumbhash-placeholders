@@ -9,6 +9,9 @@ on:
         description: 'Tag name for the release (required for manual run)'
         required: true
 
+permissions:
+  contents: write
+
 jobs:
   attach-release-asset:
     runs-on: ubuntu-latest
