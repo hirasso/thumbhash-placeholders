@@ -49,7 +49,7 @@ jobs:
           mkdir -p build
           ZIP_FILENAME="wp-thumbhash-${TAG_NAME}.zip"
           cd wp-thumbhash-scoped
-          zip -r "../build/$ZIP_FILENAME" . # Zip the contents of the subfolder
+          zip -r "../$ZIP_FILENAME" . # Zip the contents of the subfolder
 
       # Upload the ZIP file as a release asset (only during release events)
       - name: Upload release asset
@@ -57,6 +57,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: build/my-release-${TAG_NAME}.zip
-          asset_name: my-release-${TAG_NAME}.zip
+          asset_path: wp-thumbhash-${TAG_NAME}.zip
+          asset_name: wp-thumbhash-${TAG_NAME}.zip
           asset_content_type: application/zip
