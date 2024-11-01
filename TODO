@@ -1,0 +1,5 @@
+Todo
+  - add wp cli utils
+  - investigate changelog generation
+  - consider switching to https://github.com/softprops/action-gh-release
+  - test with git-updater
