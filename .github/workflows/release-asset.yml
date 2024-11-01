@@ -43,10 +43,16 @@ jobs:
         id: zip_filename
         run: echo "name=${{ github.event.repository.name }}-${{ steps.tag.outputs.tag }}.zip" >> $GITHUB_OUTPUT
 
-      # (Optional) Install dependencies if needed
-      - name: Install dependencies
+      # Create a scoped package
+      - name: Create scoped package
         run: |
           composer create-scoped-release
+
+      - name: Create ZIP file wp-thumbhash-scoped
+        run: |
+          cd wp-thumbhash-scoped
+          zip -r "../${{ steps.zip_filename.outputs.name }}" . # Zip the contents of the subfolder
+          cd ..
 
       - name: Debug information
         run: |
@@ -55,22 +61,14 @@ jobs:
           echo "Captured tag: ${{ steps.tag.outputs.tag }}"
           echo "Repo name: ${{ github.event.repository.name }}"
           echo "ZIP name: ${{ steps.zip_filename.outputs.name }}"
-
-      - name: Create ZIP file wp-thumbhash-scoped
-        run: |
-          mkdir -p build
-          cd wp-thumbhash-scoped
-          zip -r "../${{ steps.zip_filename.outputs.name }}" . # Zip the contents of the subfolder
-          cd ..
-          echo pwd
           ls -la
 
-      # # Upload the ZIP file as a release asset (only during release events)
-      # - name: Upload release asset
-      #   if: github.event_name == 'release'
-      #   uses: actions/upload-release-asset@v1
-      #   with:
-      #     upload_url: ${{ github.event.release.upload_url }}
-      #     asset_path: wp-thumbhash-${TAG_NAME}.zip
-      #     asset_name: wp-thumbhash-${TAG_NAME}.zip
-      #     asset_content_type: application/zip
+      # Upload the ZIP file as a release asset (only during release events)
+      - name: Upload release asset
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ steps.zip_filename.outputs.name }}
+          asset_name: ${{ steps.zip_filename.outputs.name }}
+          asset_content_type: application/zip
