@@ -2,7 +2,7 @@ name: Attach Release Asset
 
 on:
   release:
-    types: [published, prereleased]
+    types: [published, prereleased, released, edited]
   workflow_dispatch:
     inputs:
       tag_name:
