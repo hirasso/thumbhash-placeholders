@@ -48,6 +48,7 @@ jobs:
           php --version
           composer --version
           echo "Captured tag: ${{ steps.tag.outputs.tag }}"
+          echo "Repo name: ${{ github.event.repository.name }}"
 
       # - name: Create ZIP file wp-thumbhash-scoped
       #   run: |
