@@ -32,7 +32,7 @@
         "create-scoped-release": [
             "rm -rf vendor wp-thumbhash-scoped",
             "composer install --no-dev --prefer-dist",
-            "php scoper.phar add-prefix --force --quiet",
+            "@php scoper.phar add-prefix --force",
             "composer dump-autoload --working-dir build --classmap-authoritative",
             "mv build wp-thumbhash-scoped"
         ]

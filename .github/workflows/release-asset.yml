@@ -23,6 +23,11 @@ jobs:
         run: |
           composer create-scoped-release
 
+      - name: Debug information
+        run: |
+          php --version
+          composer --version
+
       # Determine the tag name to use
       - name: Set tag name
         id: set_tag
