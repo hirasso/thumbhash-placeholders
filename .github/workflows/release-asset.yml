@@ -56,13 +56,14 @@ jobs:
           echo "Repo name: ${{ github.event.repository.name }}"
           echo "ZIP name: ${{ steps.zip_filename.outputs.name }}"
 
-      # - name: Create ZIP file wp-thumbhash-scoped
-      #   run: |
-      #     mkdir -p build
-      #     ZIP_FILENAME="${{ github.event.repository.name }}-${{ steps.tag.outputs.tag }}.zip"
-      #     cd wp-thumbhash-scoped
-      #     zip -r "../$ZIP_FILENAME" . # Zip the contents of the subfolder
-      #     cd ..
+      - name: Create ZIP file wp-thumbhash-scoped
+        run: |
+          mkdir -p build
+          cd wp-thumbhash-scoped
+          zip -r "../${{ steps.zip_filename.outputs.name }}" . # Zip the contents of the subfolder
+          cd ..
+          echo pwd
+          ls -la
 
       # # Upload the ZIP file as a release asset (only during release events)
       # - name: Upload release asset
