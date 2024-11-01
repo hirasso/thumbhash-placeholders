@@ -10,7 +10,7 @@ on:
         required: true
 
 jobs:
-  build-and-zip:
+  attach-release-asset:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,7 @@ jobs:
       #   run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       # Determine the tag name to use
-      - name: Set tag
+      - name: Get tag
         id: tag
         run: |
           if [ "${{ github.event_name }}" == "release" ]; then
@@ -37,6 +37,11 @@ jobs:
           else
             echo "tag=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
           fi
+
+      # Determine the zip file name
+      - name: Get Zip File Name
+        id: zip_filename
+        run: echo "name=${{ github.event.repository.name }}-${{ steps.tag.outputs.tag }}.zip" >> $GITHUB_OUTPUT
 
       # (Optional) Install dependencies if needed
       - name: Install dependencies
@@ -49,11 +54,12 @@ jobs:
           composer --version
           echo "Captured tag: ${{ steps.tag.outputs.tag }}"
           echo "Repo name: ${{ github.event.repository.name }}"
+          echo "ZIP name: ${{ steps.zip_filename.outputs.name }}"
 
       # - name: Create ZIP file wp-thumbhash-scoped
       #   run: |
       #     mkdir -p build
-      #     ZIP_FILENAME="wp-thumbhash-${TAG_NAME}.zip"
+      #     ZIP_FILENAME="${{ github.event.repository.name }}-${{ steps.tag.outputs.tag }}.zip"
       #     cd wp-thumbhash-scoped
       #     zip -r "../$ZIP_FILENAME" . # Zip the contents of the subfolder
       #     cd ..
