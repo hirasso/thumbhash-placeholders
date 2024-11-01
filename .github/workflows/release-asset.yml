@@ -50,6 +50,7 @@ jobs:
           ZIP_FILENAME="wp-thumbhash-${TAG_NAME}.zip"
           cd wp-thumbhash-scoped
           zip -r "../$ZIP_FILENAME" . # Zip the contents of the subfolder
+          cd ..
 
       # Upload the ZIP file as a release asset (only during release events)
       - name: Upload release asset
