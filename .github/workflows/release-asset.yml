@@ -24,6 +24,20 @@ jobs:
           php-version: '8.3'
           extensions: imagick
 
+      # - name: Get tag
+      #   id: tag
+      #   run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      # Determine the tag name to use
+      - name: Set tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
+          fi
+
       # (Optional) Install dependencies if needed
       - name: Install dependencies
         run: |
@@ -33,31 +47,22 @@ jobs:
         run: |
           php --version
           composer --version
+          echo "Captured tag: ${{ steps.tag.outputs.tag }}"
 
-      # Determine the tag name to use
-      - name: Set tag name
-        id: set_tag
-        run: |
-          if [ "${{ github.event_name }}" == "release" ]; then
-            echo "TAG_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
-          else
-            echo "TAG_NAME=${{ github.event.inputs.tag_name }}" >> $GITHUB_ENV
-          fi
+      # - name: Create ZIP file wp-thumbhash-scoped
+      #   run: |
+      #     mkdir -p build
+      #     ZIP_FILENAME="wp-thumbhash-${TAG_NAME}.zip"
+      #     cd wp-thumbhash-scoped
+      #     zip -r "../$ZIP_FILENAME" . # Zip the contents of the subfolder
+      #     cd ..
 
-      - name: Create ZIP file wp-thumbhash-scoped
-        run: |
-          mkdir -p build
-          ZIP_FILENAME="wp-thumbhash-${TAG_NAME}.zip"
-          cd wp-thumbhash-scoped
-          zip -r "../$ZIP_FILENAME" . # Zip the contents of the subfolder
-          cd ..
-
-      # Upload the ZIP file as a release asset (only during release events)
-      - name: Upload release asset
-        if: github.event_name == 'release'
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: wp-thumbhash-${TAG_NAME}.zip
-          asset_name: wp-thumbhash-${TAG_NAME}.zip
-          asset_content_type: application/zip
+      # # Upload the ZIP file as a release asset (only during release events)
+      # - name: Upload release asset
+      #   if: github.event_name == 'release'
+      #   uses: actions/upload-release-asset@v1
+      #   with:
+      #     upload_url: ${{ github.event.release.upload_url }}
+      #     asset_path: wp-thumbhash-${TAG_NAME}.zip
+      #     asset_name: wp-thumbhash-${TAG_NAME}.zip
+      #     asset_content_type: application/zip
