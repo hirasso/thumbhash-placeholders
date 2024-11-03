@@ -34,6 +34,7 @@
             "composer install --no-dev --prefer-dist",
             "@php scoper.phar add-prefix --force",
             "composer dump-autoload --working-dir build --classmap-authoritative",
+            "rm build/composer.json build/composer.lock",
             "mv build wp-thumbhash-scoped",
             "composer install"
         ]
