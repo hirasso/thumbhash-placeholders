@@ -2,6 +2,11 @@
 
 A WordPress plugin to enhance your images with [thumbhash](https://evanw.github.io/thumbhash/) placeholders
 
+> [!NOTE]
+> This plugin is fully functional, but still in it's early stages. There will probably be a few
+> breaking changes in the API before it becomes stable. Also, documentation is a WIP. I'd be happy
+> for anyone willing to try it out and report possible problems.
+
 ## Installation
 
 1. Install the plugin:
@@ -18,4 +23,36 @@ wp plugin activate wp-thumbhash
 
 ## Usage
 
-Every time you upload an image, a matching placeholder will be generated automatically.
+Every time you upload an image, a matching placeholder will be generated automatically. You can access it in your theme via the template function `wp_thumbhash($id)->url`:
+
+### Markup
+
+```php
+<figure>
+  <figure>
+    <img src="<?= wp_thumbhash($id)->url ?>" aria-hidden="true" alt="">
+    <?= wp_get_attachment_image($id) ?>
+  </figure>
+</figure>
+```
+
+### Styling
+
+```css
+figure,
+figure img {
+  position: relative;
+}
+figure img[aria-hidden="true"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+```
+
+## Configuration
+
+WIP :)
