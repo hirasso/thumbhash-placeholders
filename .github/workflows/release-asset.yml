@@ -27,6 +27,11 @@ jobs:
           php-version: '8.3'
           extensions: imagick
 
+      - name: Prepare scoped package
+        run: |
+          composer scoped-package:prepare
+          exit 1
+
       # - name: Get tag
       #   id: tag
       #   run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT

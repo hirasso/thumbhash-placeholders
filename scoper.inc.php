@@ -26,7 +26,8 @@ $copyFiles = [
     'README.md',
     'admin/wp-thumbhash.js',
     'admin/wp-thumbhash.css',
-
+    'composer.json',
+    'composer.lock',
 ];
 /**
  * @see https://github.com/humbug/php-scoper/blob/main/docs/further-reading.md#wordpress-support
@@ -70,9 +71,9 @@ return [
         Finder::create()
             ->files()
             ->ignoreVCS(true)
-            ->in('vendor')
+            ->in('vendor'),
             // ->name('*.php')
-            ->append(['composer.json', 'composer.lock']),
+            // ->append(['composer.json', 'composer.lock']),
     ],
 
     // List of excluded files, i.e. files for which the content will be left untouched.
