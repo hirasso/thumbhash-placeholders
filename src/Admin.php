@@ -81,7 +81,7 @@ class Admin
 
         <wp-thumbhash-field data-id="<?= esc_attr($id) ?>">
             <?php if ($thumbhashURL): ?>
-                <img class="wp-thumbhash_image" src="<?= esc_url($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder') ?>">
+                <img class="wp-thumbhash_image" src="<?= esc_attr($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder') ?>">
             <?php endif; ?>
 
             <button data-wp-thumbhash-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
