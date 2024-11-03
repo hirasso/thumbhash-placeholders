@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: WP Thumbhash
- * Description: Enhance your images with thumbhash placeholders
+ * Description: Enhance your lazy-loaded images with thumbhash placeholders
  * Version: 0.0.1
  * Author: Rasso Hilber
  * Author URI: https://rassohilber.com/
