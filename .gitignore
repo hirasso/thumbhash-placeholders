@@ -10,5 +10,6 @@ vendor
 # php-cs-fixer
 .php-cs-fixer.cache
 
-# scoped package
+# php-scoper
+php-scoper.phar
 scoped
