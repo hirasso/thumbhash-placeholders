@@ -11,11 +11,13 @@ use WP_Post;
 
 class Admin
 {
+    protected static $ajaxAction = 'generate_thumbhash';
+
     public static function init()
     {
         add_filter('attachment_fields_to_edit', [static::class, 'attachmentFieldsToEdit'], 10, 2);
         add_action('admin_enqueue_scripts', [static::class, 'enqueueAssets']);
-        add_action('wp_ajax_generate_thumbhash', [static::class, 'generateThumbhashFromAdmin']);
+        add_action('wp_ajax_' . static::$ajaxAction, [static::class, 'wpAjaxGenerateThumbhash']);
     }
 
     /**
@@ -24,7 +26,11 @@ class Admin
     public static function enqueueAssets(): void
     {
         wp_enqueue_style('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.css'), [], null);
-        wp_enqueue_script('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.js'), ['jquery', 'jquery-ui-draggable'], null, true);
+        wp_enqueue_script('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.js'), ['jquery'], null, true);
+        wp_localize_script('wp-thumbhash-admin', 'wpThumbhash', [
+            'action' => static::$ajaxAction,
+            'nonce' => wp_create_nonce(static::$ajaxAction),
+        ]);
     }
 
     /**
@@ -89,12 +95,17 @@ class Admin
 <?php return ob_get_clean();
     }
 
-    public static function generateThumbhashFromAdmin(): void
+    /**
+     * (Re-)generate the thumbhash via AJAX
+     */
+    public static function wpAjaxGenerateThumbhash(): void
     {
+        check_ajax_referer(static::$ajaxAction, 'security');
+
         $id = $_POST['id'] ?? null;
-        if (!$id) {
+        if (empty($id) || !is_numeric($id)) {
             wp_send_json_error([
-                'message' => 'No id provided',
+                'message' => 'Invalid id provided',
             ]);
         }
         Plugin::generateThumbhash($id);

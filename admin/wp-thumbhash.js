@@ -45,7 +45,9 @@
         url: window.ajaxurl,
         method: "POST",
         data: {
-          action: "generate_thumbhash",
+          action: window.wpThumbhash.action,
+          /** @ts-ignore */
+          security: window.wpThumbhash.nonce,
           id: this.attachmendID, // Your custom data
         },
         success: (response) => {
