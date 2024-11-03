@@ -30,7 +30,7 @@
     },
     "scripts": {
         "scoped-package:prepare": [
-            "rm -rf vendor scoped php-scoper.phar",
+            "rm -rf vendor scoped",
             "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
             "chmod +x php-scoper.phar",
             "php php-scoper.phar --version",
