@@ -47,8 +47,8 @@ jobs:
 
       - name: Zip scoped package
         run: |
-          cp -r scoped /tmp/${{ github.event.repository.name }}
-          zip -r scoped.zip /tmp/${{ github.event.repository.name }}
+          cd scoped
+          zip -r ${{ github.event.repository.name }}.zip .
 
       - name: Debug information
         run: |
@@ -67,6 +67,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: scoped.zip
+          asset_path: scoped/${{ github.event.repository.name }}.zip
           asset_name: ${{ steps.zip_filename.outputs.name }}.zip
           asset_content_type: application/zip
