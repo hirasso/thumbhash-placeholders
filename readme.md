@@ -2,11 +2,6 @@
 
 A WordPress plugin to enhance your images with [thumbhash](https://evanw.github.io/thumbhash/) placeholders
 
-> [!NOTE]
-> This plugin is fully functional, but still in it's early stages. There will probably be a few
-> breaking changes in the API before it becomes stable. Also, documentation is a WIP. I'd be happy
-> for anyone willing to try it out and report possible problems.
-
 ## Installation
 
 1. Install the plugin:
