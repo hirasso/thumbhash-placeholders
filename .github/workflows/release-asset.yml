@@ -47,7 +47,8 @@ jobs:
 
       - name: Zip scoped package
         run: |
-          zip -r scoped.zip scoped
+          cp -r scoped /tmp/${{ github.event.repository.name }}
+          zip -r scoped.zip /tmp/${{ github.event.repository.name }}
 
       - name: Debug information
         run: |
