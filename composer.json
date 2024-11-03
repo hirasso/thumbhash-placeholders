@@ -30,7 +30,7 @@
     },
     "scripts": {
         "scoped-package:prepare": [
-            "rm -rf vendor wp-thumbhash-scoped scoper.phar",
+            "rm -rf vendor scoped scoper.phar",
             "composer global require humbug/php-scoper",
             "which php-scoper",
             "composer install --no-dev --prefer-dist"
@@ -38,9 +38,8 @@
         "scoped-package:create": [
             "composer scoped-package:prepare",
             "@php scoper.phar add-prefix --force",
-            "composer dump-autoload --working-dir build --classmap-authoritative",
-            "rm build/composer.json build/composer.lock",
-            "mv build wp-thumbhash-scoped",
+            "composer dump-autoload --working-dir scoped --classmap-authoritative",
+            "rm scoped/composer.json scoped/composer.lock",
             "composer install"
         ]
     }

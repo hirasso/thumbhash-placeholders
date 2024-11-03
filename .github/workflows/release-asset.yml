@@ -25,16 +25,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: imagick
-
-      - name: Prepare scoped package
-        run: |
-          composer scoped-package:prepare
-          exit 1
-
-      # - name: Get tag
-      #   id: tag
-      #   run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       # Determine the tag name to use
       - name: Get tag
@@ -51,16 +41,13 @@ jobs:
         id: zip_filename
         run: echo "name=${{ github.event.repository.name }}-${{ steps.tag.outputs.tag }}" >> $GITHUB_OUTPUT
 
-      # Create a scoped package
       - name: Create scoped package
         run: |
-          composer create-scoped-release
+          composer scoped-package:create
 
-      - name: Create ZIP file wp-thumbhash-scoped
+      - name: Zip scoped package
         run: |
-          cd wp-thumbhash-scoped
-          zip -r "/tmp/${{ steps.zip_filename.outputs.name }}.zip" . # Zip the contents of the subfolder
-          cd ..
+          zip -r scoped.zip scoped
 
       - name: Debug information
         run: |
@@ -79,6 +66,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: /tmp/${{ steps.zip_filename.outputs.name }}.zip
+          asset_path: scoped.zip
           asset_name: ${{ steps.zip_filename.outputs.name }}.zip
           asset_content_type: application/zip

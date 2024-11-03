@@ -10,5 +10,5 @@ vendor
 # php-cs-fixer
 .php-cs-fixer.cache
 
-# scoped
-wp-thumbhash-scoped
+# scoped package
+scoped
