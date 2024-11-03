@@ -3,27 +3,26 @@
 namespace Hirasso\WPThumbhash\WPCLI\Commands;
 
 use Hirasso\WPThumbhash\Plugin;
+use Hirasso\WPThumbhash\WPCLI\InputValidator;
+use Hirasso\WPThumbhash\WPCLI\Utils;
 use Snicco\Component\BetterWPCLI\Command;
 use Snicco\Component\BetterWPCLI\Input\Input;
 use Snicco\Component\BetterWPCLI\Output\Output;
 use Snicco\Component\BetterWPCLI\Style\SniccoStyle;
+use Snicco\Component\BetterWPCLI\Style\Text;
 use Snicco\Component\BetterWPCLI\Synopsis\InputArgument;
 use Snicco\Component\BetterWPCLI\Synopsis\Synopsis;
 use WP_Query;
-use WP_CLI;
 
 /**
  * A WP CLI command to generate thumbhash placeholders
  * @see https://github.com/snicco/better-wp-cli
- * @TODO see how to organize output helper methods
  */
 class ClearCommand extends Command
 {
     protected static string $name = 'clear';
 
     protected static string $short_description = 'Clear thumbhash placeholders';
-
-    protected SniccoStyle $io;
 
     /**
      * Command synopsis.
@@ -41,9 +40,16 @@ class ClearCommand extends Command
 
     public function execute(Input $input, Output $output): int
     {
-        $this->io = new SniccoStyle($input, $output);
+        $io = new SniccoStyle($input, $output);
 
         $ids = $input->getRepeatingArgument('ids', []);
+
+        $io->title("Clearing Thumbhash Placeholders");
+
+        $validator = new InputValidator($io);
+        if (!$validator->isNumericArray($ids, "Non-numeric ids provided")) {
+            return Command::INVALID;
+        }
 
         $queryArgs = [
             'post_type' => 'attachment',
@@ -64,22 +70,27 @@ class ClearCommand extends Command
 
         $query = new WP_Query($queryArgs);
 
-        $output->newLine();
-
         if (!$query->have_posts()) {
-            WP_CLI::success('No images with placeholders found.');
+            $io->success("No images with placeholders found");
             return Command::SUCCESS;
         }
         $count = 0;
         foreach ($query->posts as $id) {
             delete_post_meta($id, Plugin::META_KEY);
-            $output->writeln("Removed placeholder for attachment ID: $id");
+            $output->writeln(Utils::getStatusLine(
+                basename(wp_get_attachment_url($id)),
+                $io->colorize('cleared ✔︎', Text::GREEN)
+            ));
             $count++;
         }
 
         $output->newLine();
 
-        WP_CLI::success("$count placeholders cleared");
+        $io->success(match ($count) {
+            1 => "$count placeholder cleared",
+            0 => "No placeholders cleared",
+            default => "$count placeholders cleared"
+        });
 
         return Command::SUCCESS;
     }

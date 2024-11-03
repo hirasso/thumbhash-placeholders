@@ -4,15 +4,17 @@ namespace Hirasso\WPThumbhash\WPCLI\Commands;
 
 use Hirasso\WPThumbhash\ImageDownloader;
 use Hirasso\WPThumbhash\Plugin;
+use Hirasso\WPThumbhash\WPCLI\InputValidator;
+use Hirasso\WPThumbhash\WPCLI\Utils;
 use Snicco\Component\BetterWPCLI\Command;
 use Snicco\Component\BetterWPCLI\Input\Input;
 use Snicco\Component\BetterWPCLI\Output\Output;
 use Snicco\Component\BetterWPCLI\Style\SniccoStyle;
+use Snicco\Component\BetterWPCLI\Style\Text;
 use Snicco\Component\BetterWPCLI\Synopsis\InputArgument;
 use Snicco\Component\BetterWPCLI\Synopsis\InputFlag;
 use Snicco\Component\BetterWPCLI\Synopsis\Synopsis;
 use WP_Query;
-use WP_CLI;
 
 /**
  * A WP CLI command to generate thumbhash placeholders
@@ -23,8 +25,6 @@ class GenerateCommand extends Command
     protected static string $name = 'generate';
 
     protected static string $short_description = 'Generate thumbhash placeholders';
-
-    protected SniccoStyle $io;
 
     /**
      * Command synopsis.
@@ -44,14 +44,20 @@ class GenerateCommand extends Command
         );
     }
 
+    /**
+     * Execute the command
+     */
     public function execute(Input $input, Output $output): int
     {
-        $this->io = new SniccoStyle($input, $output);
+        $io = new SniccoStyle($input, $output);
 
         $ids = $input->getRepeatingArgument('ids', []);
         $force = $input->getFlag('force');
 
-        if (!$this->validateArgumentIds($ids)) {
+        $io->title("Generating Thumbhash Placeholders");
+
+        $validator = new InputValidator($io);
+        if (!$validator->isNumericArray($ids, "Non-numeric ids provided")) {
             return Command::INVALID;
         }
 
@@ -60,6 +66,7 @@ class GenerateCommand extends Command
             'post_status' => 'inherit',
             'post_mime_type' => 'image',
             'posts_per_page' => -1,
+            'post__in' => $ids,
             'fields' => 'ids',
             'meta_query' => [
                 [
@@ -77,50 +84,31 @@ class GenerateCommand extends Command
 
         ImageDownloader::cleanupOldImages();
 
-        $output->newLine();
-
         if (!$query->have_posts()) {
-            $output->writeln(WP_CLI::colorize("%GSuccess%n No images without placeholders found"));
+            $io->success("No images without placeholders found");
             return Command::SUCCESS;
         }
 
         $count = 0;
         foreach ($query->posts as $id) {
             $thumbhash = Plugin::generateThumbhash($id);
-            $status = WP_CLI::colorize(!!$thumbhash ? "%Ggenerated ✔︎%n" : "%RFailed%n");
-            $output->writeln($this->getStatusLine(basename(wp_get_attachment_url($id)), $status));
+            $status = match (!!$thumbhash) {
+                true => $io->colorize('generated ✔︎', Text::GREEN),
+                default => $io->colorize('failed ❌', Text::RED)
+            };
+            $output->writeln(Utils::getStatusLine(basename(wp_get_attachment_url($id)), $status));
             if ($thumbhash) {
                 $count++;
             }
         }
-
         $output->newLine();
-        $output->writeln(WP_CLI::colorize("%GSuccess%n $count placeholders generated."));
+
+        $io->success(match ($count) {
+            1 => "$count placeholder generated",
+            0 => "No placeholders generated",
+            default => "$count placeholders generated"
+        });
 
         return Command::SUCCESS;
-    }
-
-    /**
-     * Create a status line, for example:
-     * image.jpg ..................................................... generated ✔︎
-     */
-    private function getStatusLine(string $start, string $end): string
-    {
-        $dots = str_repeat('.', max(0, 70 - strlen($start)));
-        return "$start $dots $end";
-    }
-
-    /**
-     * Make sure all ids are numeric
-     */
-    private function validateArgumentIds(array $ids): bool
-    {
-        foreach ($ids as $id) {
-            if (!is_numeric($id)) {
-                $this->io->error("Invalid non-numeric id provided: $id");
-                return false;
-            }
-        }
-        return true;
     }
 }
