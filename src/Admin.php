@@ -28,8 +28,11 @@ class Admin
         wp_enqueue_style('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.css'), [], null);
         wp_enqueue_script('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.js'), ['jquery'], null, true);
         wp_localize_script('wp-thumbhash-admin', 'wpThumbhash', [
-            'action' => static::$ajaxAction,
-            'nonce' => wp_create_nonce(static::$ajaxAction),
+            'ajax' => [
+                'url' => admin_url('admin-ajax.php'),
+                'action' => static::$ajaxAction,
+                'nonce' => wp_create_nonce(static::$ajaxAction),
+            ],
         ]);
     }
 

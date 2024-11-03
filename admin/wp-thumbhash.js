@@ -33,12 +33,13 @@
     }
 
     generate = () => {
+      const { url, action, nonce: security } = window.wpThumbhash.ajax;
       $.ajax({
-        url: window.ajaxurl,
+        url,
         method: "POST",
         data: {
-          action: window.wpThumbhash.action,
-          security: window.wpThumbhash.nonce,
+          action,
+          security,
           id: this.attachmendID,
         },
         success: (response) => {
