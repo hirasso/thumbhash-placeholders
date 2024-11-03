@@ -6,6 +6,7 @@
  * Version: 0.0.1
  * Author: Rasso Hilber
  * Author URI: https://rassohilber.com/
+ * Text Domain: wp-thumbhash
  * Requires PHP: 8.2
  * License: GPL-3.0-or-later
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html

@@ -16,6 +16,7 @@ use WP_Post;
 class Plugin
 {
     public const META_KEY = '_wp_thumbhash';
+    public const TEXT_DOMAIN = 'wp-thumbhash';
 
     /**
      * Initialize the plugin

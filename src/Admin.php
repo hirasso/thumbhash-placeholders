@@ -64,7 +64,7 @@ class Admin
         }
 
         $fields['wp-thumbhash-field'] = [
-            'label' => __('Placeholder'),
+            'label' => __('Placeholder', 'wp-thumbhash'),
             'input'  => 'html',
             'html' => static::renderAttachmentField($attachment->ID, AdminContext::INITIAL),
         ];
@@ -78,7 +78,7 @@ class Admin
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
         $thumbhashURL = Plugin::getThumbhashValue($id)->url;
-        $buttonLabel = $thumbhashURL ? __('Regenerate') : __('Generate');
+        $buttonLabel = $thumbhashURL ? __('Regenerate', 'wp-thumbhash') : __('Generate', 'wp-thumbhash');
 
         ob_start() ?>
 
