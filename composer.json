@@ -40,8 +40,7 @@
             "composer scoped-package:prepare",
             "php php-scoper.phar add-prefix --force",
             "composer dump-autoload --working-dir scoped --classmap-authoritative",
-            "rm scoped/composer.json scoped/composer.lock",
-            "composer install"
+            "rm scoped/composer.json scoped/composer.lock"
         ]
     }
 }

@@ -52,7 +52,8 @@ jobs:
           composer --version
           echo "Captured tag: ${{ steps.tag.outputs.tag }}"
           echo "Repo name: ${{ github.event.repository.name }}"
-          ls -la
+          echo "🧐 Scoped folder contents:"
+          cd scoped && ls -la
 
       # Upload the ZIP file as a release asset (only during release events)
       - name: Upload release asset
