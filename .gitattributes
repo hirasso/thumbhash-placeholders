@@ -14,3 +14,5 @@
 /package.json export-ignore
 /jsconfig.json export-ignore
 /scoper.inc.php export-ignore
+/TODO export-ignore
+/scoper.phar export-ignore
