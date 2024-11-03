@@ -1,17 +1,10 @@
+/// <reference path="./types.d.ts"/>
+
 "use strict";
 
 /**
  * @typedef {import('jquery')} jQuery
  * @typedef {import('jqueryui')} jQueryUI
- */
-
-/**
- * @typedef {object} CustomWindowObject
- * @property {string} [ajaxurl]
- */
-
-/**
- * @typedef {Window & CustomWindowObject} CustomWindow
  */
 
 (($) => {
@@ -41,19 +34,16 @@
 
     generate = () => {
       $.ajax({
-        /** @ts-ignore */
         url: window.ajaxurl,
         method: "POST",
         data: {
           action: window.wpThumbhash.action,
-          /** @ts-ignore */
           security: window.wpThumbhash.nonce,
-          id: this.attachmendID, // Your custom data
+          id: this.attachmendID,
         },
         success: (response) => {
           const { html } = response?.data;
-          const { success } = response;
-          if (success) {
+          if (response.success) {
             this.replaceWith(createElement(html));
           }
         },
