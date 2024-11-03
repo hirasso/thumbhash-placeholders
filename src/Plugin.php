@@ -54,15 +54,10 @@ class Plugin
     }
 
     /**
-     * Get the thumbhash URL for an attachment
+     * Get the thumbhash value for an attachment
      */
-    public static function getThumbhashURL(int|WP_Post $post): ?string
+    public static function getThumbhashValue(int|WP_Post $post): WPThumbhashValue
     {
-        $attachmentID = $post->ID ?? $post;
-        if (!wp_attachment_is_image($attachmentID)) {
-            return null;
-        }
-        $hash = get_post_meta($attachmentID, static::META_KEY, true);
-        return Thumbhash::decode($hash);
+        return new WPThumbhashValue($post);
     }
 }
