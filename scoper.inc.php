@@ -23,7 +23,7 @@ use Isolated\Symfony\Component\Finder\Finder;
 $excludedFiles = [];
 $copyFiles = [
     'wp-thumbhash.php',
-    'readme.md',
+    'readme.txt',
     'admin/wp-thumbhash.js',
     'admin/wp-thumbhash.css',
     'composer.json',
