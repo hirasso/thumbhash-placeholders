@@ -1,6 +1,6 @@
 === WP Thumbhash ===
 Contributors: nonverbla
-Tags: thumbhash, blurhash, placeholder, lqip, blur, lazyload
+Tags: thumbhash, placeholder, lqip, blur, lazyload
 
 == Description ==
 
