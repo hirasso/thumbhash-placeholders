@@ -79,9 +79,9 @@ class Admin
 
         ob_start() ?>
 
-        <wp-thumbhash-field data-id="<?= $id ?>">
+        <wp-thumbhash-field data-id="<?= esc_attr($id) ?>">
             <?php if ($thumbhashURL): ?>
-                <img class="wp-thumbhash_image" title="get_wp_thumbhash_url(<?= $id ?>)" src="<?= $thumbhashURL ?>" alt="Thumbhash placeholder">
+                <img class="wp-thumbhash_image" src="<?= esc_url($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder') ?>">
             <?php endif; ?>
 
             <button data-wp-thumbhash-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
@@ -96,19 +96,23 @@ class Admin
     }
 
     /**
-     * (Re-)generate the thumbhash via AJAX
+     * (Re-)generate the thumbhash via AJAX.
+     * Return the updated attachment field on success
      */
     public static function wpAjaxGenerateThumbhash(): void
     {
         check_ajax_referer(static::$ajaxAction, 'security');
 
         $id = $_POST['id'] ?? null;
+
         if (empty($id) || !is_numeric($id)) {
             wp_send_json_error([
                 'message' => 'Invalid id provided',
             ]);
         }
+
         Plugin::generateThumbhash($id);
+
         wp_send_json_success([
             'html' => static::renderAttachmentField($id, AdminContext::REGENERATE),
         ]);

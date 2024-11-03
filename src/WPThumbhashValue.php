@@ -6,7 +6,10 @@ use WP_Post;
 
 final readonly class WPThumbhashValue
 {
+    /** The escaped data URL of the thumbhash placeholder */
     public ?string $url;
+    /** The decoded value of the placeholder */
+    public ?string $decoded;
 
     public function __construct(int|WP_Post $post)
     {
@@ -22,6 +25,7 @@ final readonly class WPThumbhashValue
             return;
         }
 
-        $this->url = Thumbhash::decode($hash);
+        $this->decoded = Thumbhash::decode($hash);
+        $this->url = esc_attr($this->decoded);
     }
 }
