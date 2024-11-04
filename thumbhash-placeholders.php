@@ -10,7 +10,7 @@
  *
  * @wordpress-plugin
  * Plugin Name: ThumbHash Placeholders
- * Description: Enhance your lazy-loaded images with thumbhash placeholders
+ * Description: Generate image placeholders for smoother lazyloading 🎨
  * Version: 0.0.1
  * Requires PHP: 8.2
  * Requires at least: 5.8

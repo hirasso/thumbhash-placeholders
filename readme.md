@@ -1,6 +1,6 @@
 # ThumbHash Placeholders
 
-**Generate image placeholders of WordPress images for smoother lazyloading. 🎨**
+**A WordPress plugin to generate image placeholders for smoother lazyloading 🎨**
 
 ## How it works
 
