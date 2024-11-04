@@ -20,8 +20,6 @@
  * Text Domain: thumbhash-placeholders
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
- *
- * GitHub Plugin URI: hirasso/thumbhash-placeholders
  */
 
 use Hirasso\ThumbhashPlaceholders\Placeholder;
