@@ -2,6 +2,10 @@
 
 **Generate image placeholders of WordPress images for smoother lazyloading. 🎨**
 
+## How it works
+
+This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automatically generate a small blurry placeholder image for each image uploaded. In your frontend templates, you can access the image placeholder as a data URI string to display while the high-quality image is loading.
+
 ## Installation
 
 1. Install the plugin:
@@ -18,14 +22,12 @@ wp plugin activate thumbhash-placeholders
 
 ## Usage
 
-Every time you upload an image, a matching placeholder will be generated automatically. You can access it in your theme via the template function `wp_thumbhash($id)->url`:
-
 ### Markup
 
 ```php
 <figure>
   <figure>
-    <img src="<?= wp_thumbhash($id)->url ?>" aria-hidden="true" alt="">
+    <img src="<?= thumbhash($id)->url ?>" aria-hidden="true" alt="">
     <?= wp_get_attachment_image($id) ?>
   </figure>
 </figure>
@@ -48,6 +50,20 @@ figure img[aria-hidden="true"] {
 }
 ```
 
-## Configuration
+## WP-CLI Commands
 
-WIP :)
+### `thumbhash generate`
+
+Generate placeholders for existing images.
+
+```
+wp thumbhash generate [<ids>...] [--force]
+```
+
+### `thumbhash clear`
+
+Clear placeholders for all or selected images
+
+```
+wp thumbhash clear [<ids>...]
+```
