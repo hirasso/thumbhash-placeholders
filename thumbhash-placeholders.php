@@ -44,7 +44,7 @@ Plugin::init();
  * API functions
  */
 if (!function_exists('thumbhash')) {
-    function get_thumbhash_placeholder(int|WP_Post $post): Placeholder
+    function get_thumbhash_placeholder(int|WP_Post $post): ?Placeholder
     {
         return Plugin::getPlaceholder($post);
     }

@@ -57,8 +57,28 @@ class Plugin
     /**
      * Get the thumbhash value for an attachment
      */
-    public static function getPlaceholder(int|WP_Post $post): Placeholder
+    public static function getPlaceholder(int|WP_Post $post): ?Placeholder
     {
-        return new Placeholder($post);
+        $attachmentID = $post->ID ?? $post;
+
+        if (!wp_attachment_is_image($attachmentID)) {
+            return null;
+        }
+
+        $hash = get_post_meta($attachmentID, Plugin::META_KEY, true);
+        if (!is_string($hash) || empty($hash)) {
+            return null;
+        }
+
+        $uri = Thumbhash::getDataURI($hash);
+
+        if (is_wp_error($uri)) {
+            return null;
+        }
+
+        return new Placeholder(
+            hash: $hash,
+            dataURI: esc_url($uri, ['data'])
+        );
     }
 }
