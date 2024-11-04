@@ -71,8 +71,16 @@ return [
         Finder::create()
             ->files()
             ->ignoreVCS(true)
+            ->name(['*.php', '*.md', 'LICENSE', '*.json'])
+            ->exclude([
+                'doc',
+                'test',
+                'test_old',
+                'tests',
+                'Tests',
+                'vendor-bin',
+            ])
             ->in('vendor'),
-            // ->name('*.php')
             // ->append(['composer.json', 'composer.lock']),
     ],
 
