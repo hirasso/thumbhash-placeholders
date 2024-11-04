@@ -68,6 +68,7 @@ class GenerateCommand extends Command
             'posts_per_page' => -1,
             'post__in' => $ids,
             'fields' => 'ids',
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- this only ever runs in WP CLI
             'meta_query' => [
                 [
                     'key' => Plugin::META_KEY,

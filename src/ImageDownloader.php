@@ -8,7 +8,8 @@ declare(strict_types=1);
 
 namespace Hirasso\ThumbhashPlaceholders;
 
-use Exception;
+use WP_Error;
+use WP_Filesystem_Direct;
 
 class ImageDownloader
 {
@@ -30,21 +31,26 @@ class ImageDownloader
     /**
      * Download a remote image and save it to the custom directory.
      */
-    public static function downloadImage(string $url): string
+    public static function downloadImage(string $url): string|WP_Error
     {
         $dir = static::getDir();
         $response = wp_remote_get($url, ['timeout' => 300]);
 
         if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
-            return throw new Exception("Failed to download image: $url");
+            return new WP_Error('download_failed', "Failed to download image: $url");
         }
+
+        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+
+        $filesystem = new WP_Filesystem_Direct(true);
 
         $filename = uniqid() . '-' . basename($url);
         $file = "$dir/$filename";
         $fileContents = wp_remote_retrieve_body($response);
 
-        if (file_put_contents($file, $fileContents) === false) {
-            throw new Exception("Failed to write file to directory: $dir");
+        if ($filesystem->put_contents($file, $fileContents, FS_CHMOD_FILE) === false) {
+            return new WP_Error('could_not_write', "Failed to write file to directory: $dir");
         }
 
         return $file;
@@ -61,7 +67,7 @@ class ImageDownloader
 
         foreach ($images as $image) {
             if (filemtime($image) < $oneHourAgo) {
-                unlink($image);
+                wp_delete_file($image);
             }
         }
     }
