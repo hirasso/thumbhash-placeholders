@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WPThumbhash\Enums;
+namespace Hirasso\ThumbhashPlaceholders\Enums;
 
 enum ImageDriver: string
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Hirasso\WPThumbhash\WPCLI\Commands;
+namespace Hirasso\ThumbhashPlaceholders\WPCLI\Commands;
 
-use Hirasso\WPThumbhash\Plugin;
-use Hirasso\WPThumbhash\WPCLI\InputValidator;
-use Hirasso\WPThumbhash\WPCLI\Utils;
+use Hirasso\ThumbhashPlaceholders\Plugin;
+use Hirasso\ThumbhashPlaceholders\WPCLI\InputValidator;
+use Hirasso\ThumbhashPlaceholders\WPCLI\Utils;
 use Snicco\Component\BetterWPCLI\Command;
 use Snicco\Component\BetterWPCLI\Input\Input;
 use Snicco\Component\BetterWPCLI\Output\Output;
@@ -103,19 +103,5 @@ class ClearCommand extends Command
     {
         $dots = str_repeat('.', max(0, 70 - strlen($start)));
         return "$start $dots $end";
-    }
-
-    /**
-     * Make sure all ids are numeric
-     */
-    private function validateArgumentIds(array $ids): bool
-    {
-        foreach ($ids as $id) {
-            if (!is_numeric($id)) {
-                $this->io->error("Invalid non-numeric id provided: $id");
-                return false;
-            }
-        }
-        return true;
     }
 }

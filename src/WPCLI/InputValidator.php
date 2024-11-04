@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WPThumbhash\WPCLI;
+namespace Hirasso\ThumbhashPlaceholders\WPCLI;
 
 use Snicco\Component\BetterWPCLI\Style\SniccoStyle;
 

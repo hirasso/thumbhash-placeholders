@@ -19,7 +19,7 @@
     return /** @type {HTMLElement} */ (template.content.children[0]);
   }
 
-  class WPThumbhashField extends HTMLElement {
+  class ThumbhashPlaceholdersField extends HTMLElement {
     /** @type {number} attachmentID */
     attachmendID;
 
@@ -55,5 +55,8 @@
     };
   }
 
-  customElements.define("thumbhash-placeholders-field", WPThumbhashField);
+  customElements.define(
+    "thumbhash-placeholders-field",
+    ThumbhashPlaceholdersField,
+  );
 })(/** @type {jQuery} */ jQuery);

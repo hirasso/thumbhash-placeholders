@@ -6,16 +6,16 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\WPThumbhash;
+namespace Hirasso\ThumbhashPlaceholders;
 
-use Hirasso\WPThumbhash\WPCLI\Commands\ClearCommand;
-use Hirasso\WPThumbhash\WPCLI\WPCLIApplication;
-use Hirasso\WPThumbhash\WPCLI\Commands\GenerateCommand;
+use Hirasso\ThumbhashPlaceholders\WPCLI\Commands\ClearCommand;
+use Hirasso\ThumbhashPlaceholders\WPCLI\WPCLIApplication;
+use Hirasso\ThumbhashPlaceholders\WPCLI\Commands\GenerateCommand;
 use WP_Post;
 
 class Plugin
 {
-    public const META_KEY = '_wp_thumbhash';
+    public const META_KEY = '_thumbhash';
     public const TEXT_DOMAIN = 'thumbhash-placeholders';
 
     /**
@@ -57,8 +57,8 @@ class Plugin
     /**
      * Get the thumbhash value for an attachment
      */
-    public static function getThumbhashValue(int|WP_Post $post): WPThumbhashValue
+    public static function getPlaceholder(int|WP_Post $post): Placeholder
     {
-        return new WPThumbhashValue($post);
+        return new Placeholder($post);
     }
 }

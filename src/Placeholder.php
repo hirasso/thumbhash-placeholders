@@ -1,10 +1,10 @@
 <?php
 
-namespace Hirasso\WPThumbhash;
+namespace Hirasso\ThumbhashPlaceholders;
 
 use WP_Post;
 
-final readonly class WPThumbhashValue
+final readonly class Placeholder
 {
     /** The escaped data URL of the thumbhash placeholder */
     public ?string $url;

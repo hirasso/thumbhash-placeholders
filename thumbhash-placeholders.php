@@ -3,7 +3,7 @@
 /**
  * Plugin Name
  *
- * @package           WPThumbhash
+ * @package           ThumbhashPlaceholders
  * @author            Rasso Hilber
  * @copyright         2024 Rasso Hilber
  * @license           GPL-2.0-or-later
@@ -24,8 +24,8 @@
  * GitHub Plugin URI: hirasso/thumbhash-placeholders
  */
 
-use Hirasso\WPThumbhash\Plugin;
-use Hirasso\WPThumbhash\WPThumbhashValue;
+use Hirasso\ThumbhashPlaceholders\Placeholder;
+use Hirasso\ThumbhashPlaceholders\Plugin;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -43,9 +43,9 @@ Plugin::init();
 /**
  * API functions
  */
-if (!function_exists('wp_thumbhash')) {
-    function wp_thumbhash(int|WP_Post $post): WPThumbhashValue
+if (!function_exists('thumbhash')) {
+    function get_thumbhash_placeholder(int|WP_Post $post): Placeholder
     {
-        return Plugin::getThumbhashValue($post);
+        return Plugin::getPlaceholder($post);
     }
 }

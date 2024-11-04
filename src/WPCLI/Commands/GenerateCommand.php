@@ -1,11 +1,11 @@
 <?php
 
-namespace Hirasso\WPThumbhash\WPCLI\Commands;
+namespace Hirasso\ThumbhashPlaceholders\WPCLI\Commands;
 
-use Hirasso\WPThumbhash\ImageDownloader;
-use Hirasso\WPThumbhash\Plugin;
-use Hirasso\WPThumbhash\WPCLI\InputValidator;
-use Hirasso\WPThumbhash\WPCLI\Utils;
+use Hirasso\ThumbhashPlaceholders\ImageDownloader;
+use Hirasso\ThumbhashPlaceholders\Plugin;
+use Hirasso\ThumbhashPlaceholders\WPCLI\InputValidator;
+use Hirasso\ThumbhashPlaceholders\WPCLI\Utils;
 use Snicco\Component\BetterWPCLI\Command;
 use Snicco\Component\BetterWPCLI\Input\Input;
 use Snicco\Component\BetterWPCLI\Output\Output;

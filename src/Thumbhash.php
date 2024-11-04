@@ -1,9 +1,9 @@
 <?php
 
-namespace Hirasso\WPThumbhash;
+namespace Hirasso\ThumbhashPlaceholders;
 
 use Exception;
-use Hirasso\WPThumbhash\Enums\ImageDriver;
+use Hirasso\ThumbhashPlaceholders\Enums\ImageDriver;
 use WP_Image_Editor;
 use WP_Error;
 use Thumbhash\Thumbhash as ThumbhashLib;
@@ -11,7 +11,7 @@ use Thumbhash\Thumbhash as ThumbhashLib;
 use function Thumbhash\extract_size_and_pixels_with_gd;
 use function Thumbhash\extract_size_and_pixels_with_imagick;
 
-class Thumbhash
+class ThumbHash
 {
     /**
      * Generate a thumbhash from an attachment

@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\WPThumbhash;
+namespace Hirasso\ThumbhashPlaceholders;
 
 use Exception;
 

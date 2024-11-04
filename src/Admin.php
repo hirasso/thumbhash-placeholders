@@ -4,9 +4,9 @@
  * https://rassohilber.com
  */
 
-namespace Hirasso\WPThumbhash;
+namespace Hirasso\ThumbhashPlaceholders;
 
-use Hirasso\WPThumbhash\Enums\AdminContext;
+use Hirasso\ThumbhashPlaceholders\Enums\AdminContext;
 use WP_Post;
 
 class Admin
@@ -77,7 +77,7 @@ class Admin
      */
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
-        $thumbhashURL = Plugin::getThumbhashValue($id)->url;
+        $thumbhashURL = Plugin::getPlaceholder($id)->url;
         $buttonLabel = $thumbhashURL ? __('Regenerate', 'thumbhash-placeholders') : __('Generate', 'thumbhash-placeholders');
 
         ob_start() ?>

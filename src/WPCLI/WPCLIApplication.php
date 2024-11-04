@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WPThumbhash\WPCLI;
+namespace Hirasso\ThumbhashPlaceholders\WPCLI;
 
 use Snicco\Component\BetterWPCLI\WPCLIApplication as SniccoWPCLIApplication;
 use Snicco\Component\BetterWPCLI\CommandLoader\ArrayCommandLoader;
