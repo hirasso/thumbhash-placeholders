@@ -1,16 +1,16 @@
-=== WP Thumbhash ===
+=== ThumbHash Placeholders ===
 Contributors: nonverbla
 Tags: thumbhash, placeholder, lqip, blur, lazyload
 
 == Description ==
 
-**WP Thumbhash** is a plugin that enhances images by generating thumbhash placeholders for a better loading experience.
+**ThumbHash Placeholders** is a plugin that enhances images by generating thumbhash placeholders for a better loading experience.
 
 == Installation ==
 
 Install like any other WordPress plugin :)
 
-The **documentation** can be found on [GitHub](https://github.com/hirasso/wp-thumbhash)
+The **documentation** can be found on [GitHub](https://github.com/hirasso/thumbhash-placeholders)
 
 == Changelog ==
 

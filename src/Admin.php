@@ -25,9 +25,9 @@ class Admin
      */
     public static function enqueueAssets(): void
     {
-        wp_enqueue_style('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.css'), [], null);
-        wp_enqueue_script('wp-thumbhash-admin', self::assetUri('/admin/wp-thumbhash.js'), ['jquery'], null, true);
-        wp_localize_script('wp-thumbhash-admin', 'wpThumbhash', [
+        wp_enqueue_style('thumbhash-placeholders-admin', self::assetUri('/admin/thumbhash-placeholders.css'), [], null);
+        wp_enqueue_script('thumbhash-placeholders-admin', self::assetUri('/admin/thumbhash-placeholders.js'), ['jquery'], null, true);
+        wp_localize_script('thumbhash-placeholders-admin', 'wpThumbhash', [
             'ajax' => [
                 'url' => admin_url('admin-ajax.php'),
                 'action' => static::$ajaxAction,
@@ -63,8 +63,8 @@ class Admin
             return $fields;
         }
 
-        $fields['wp-thumbhash-field'] = [
-            'label' => __('Placeholder', 'wp-thumbhash'),
+        $fields['thumbhash-placeholders-field'] = [
+            'label' => __('Placeholder', 'thumbhash-placeholders'),
             'input'  => 'html',
             'html' => static::renderAttachmentField($attachment->ID, AdminContext::INITIAL),
         ];
@@ -78,22 +78,22 @@ class Admin
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
         $thumbhashURL = Plugin::getThumbhashValue($id)->url;
-        $buttonLabel = $thumbhashURL ? __('Regenerate', 'wp-thumbhash') : __('Generate', 'wp-thumbhash');
+        $buttonLabel = $thumbhashURL ? __('Regenerate', 'thumbhash-placeholders') : __('Generate', 'thumbhash-placeholders');
 
         ob_start() ?>
 
-        <wp-thumbhash-field data-id="<?= esc_attr($id) ?>">
+        <thumbhash-placeholders-field data-id="<?= esc_attr($id) ?>">
             <?php if ($thumbhashURL): ?>
-                <img class="wp-thumbhash_image" src="<?= esc_attr($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder') ?>">
+                <img class="thumbhash-placeholders_image" src="<?= esc_attr($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder') ?>">
             <?php endif; ?>
 
-            <button data-wp-thumbhash-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
+            <button data-thumbhash-placeholders-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
 
             <?php if ($context === AdminContext::REGENERATE): ?>
-                <i aria-hidden="true" data-wp-thumbhash-regenerated></i>
+                <i aria-hidden="true" data-thumbhash-placeholders-regenerated></i>
             <?php endif; ?>
 
-        </wp-thumbhash-field>
+        </thumbhash-placeholders-field>
 
 <?php return ob_get_clean();
     }

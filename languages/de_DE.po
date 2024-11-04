@@ -2,8 +2,8 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Thumbhash 0.0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-thumbhash\n"
+"Project-Id-Version: ThumbHash Placeholders 0.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/thumbhash-placeholders\n"
 "POT-Creation-Date: 2024-11-03T21:35:33+00:00\n"
 "PO-Revision-Date: 2024-11-03 22:36+0100\n"
 "Last-Translator: \n"
@@ -13,25 +13,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
-"X-Domain: wp-thumbhash\n"
+"X-Domain: thumbhash-placeholders\n"
 
 #. Plugin Name of the plugin
-#: wp-thumbhash.php
-msgid "WP Thumbhash"
+#: thumbhash-placeholders.php
+msgid "ThumbHash Placeholders"
 msgstr ""
 
 #. Description of the plugin
-#: wp-thumbhash.php
+#: thumbhash-placeholders.php
 msgid "Enhance your images with thumbhash placeholders"
 msgstr ""
 
 #. Author of the plugin
-#: wp-thumbhash.php
+#: thumbhash-placeholders.php
 msgid "Rasso Hilber"
 msgstr ""
 
 #. Author URI of the plugin
-#: wp-thumbhash.php
+#: thumbhash-placeholders.php
 msgid "https://rassohilber.com/"
 msgstr ""
 

@@ -9,7 +9,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name: WP Thumbhash
+ * Plugin Name: ThumbHash Placeholders
  * Description: Enhance your lazy-loaded images with thumbhash placeholders
  * Version: 0.0.1
  * Requires PHP: 8.2
@@ -17,11 +17,11 @@
  * Tested up to: 6.6
  * Author: Rasso Hilber
  * Author URI: https://rassohilber.com/
- * Text Domain: wp-thumbhash
+ * Text Domain: thumbhash-placeholders
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  *
- * GitHub Plugin URI: hirasso/wp-thumbhash
+ * GitHub Plugin URI: hirasso/thumbhash-placeholders
  */
 
 use Hirasso\WPThumbhash\Plugin;

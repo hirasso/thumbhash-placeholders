@@ -54,7 +54,7 @@ class GenerateCommand extends Command
         $ids = $input->getRepeatingArgument('ids', []);
         $force = $input->getFlag('force');
 
-        $io->title("Generating Thumbhash Placeholders");
+        $io->title("Generating ThumbHash Placeholders");
 
         $validator = new InputValidator($io);
         if (!$validator->isNumericArray($ids, "Non-numeric ids provided")) {

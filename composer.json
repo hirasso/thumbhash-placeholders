@@ -1,5 +1,5 @@
 {
-    "name": "hirasso/wp-thumbhash",
+    "name": "hirasso/thumbhash-placeholders",
     "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",

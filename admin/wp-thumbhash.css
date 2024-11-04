@@ -1,9 +1,9 @@
-wp-thumbhash-field {
+thumbhash-placeholders-field {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-wp-thumbhash-field img {
+thumbhash-placeholders-field img {
   display: block;
   height: 26px;
   width: auto;
@@ -15,7 +15,7 @@ wp-thumbhash-field img {
     opacity: 0;
   }
 }
-[data-wp-thumbhash-regenerated] {
+[data-thumbhash-placeholders-regenerated] {
   background: hsl(168, 100%, 50%);
   --size: 1.3rem;
   display: block;
@@ -31,6 +31,6 @@ wp-thumbhash-field img {
   animation: disappear 0.5s 1s linear;
   animation-fill-mode: forwards;
 }
-[data-wp-thumbhash-regenerated]::before {
+[data-thumbhash-placeholders-regenerated]::before {
   content: "✔︎";
 }

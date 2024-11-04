@@ -26,7 +26,7 @@
     constructor() {
       super();
       const button = /** @type {!HTMLButtonElement} */ (
-        this.querySelector("[data-wp-thumbhash-generate]")
+        this.querySelector("[data-thumbhash-placeholders-generate]")
       );
       this.attachmendID = parseInt(String(this.getAttribute("data-id")), 10);
       button.addEventListener("click", this.generate);
@@ -55,5 +55,5 @@
     };
   }
 
-  customElements.define("wp-thumbhash-field", WPThumbhashField);
+  customElements.define("thumbhash-placeholders-field", WPThumbhashField);
 })(/** @type {jQuery} */ jQuery);

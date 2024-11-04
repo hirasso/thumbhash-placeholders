@@ -1,19 +1,19 @@
-# WP Thumbhash
+# ThumbHash Placeholders
 
-A WordPress plugin to enhance your images with [thumbhash](https://evanw.github.io/thumbhash/) placeholders
+**Generate image placeholders of WordPress images for smoother lazyloading. 🎨**
 
 ## Installation
 
 1. Install the plugin:
 
 ```shell
-composer require hirasso/wp-thumbhash
+composer require hirasso/thumbhash-placeholders
 ```
 
 1. Activate the plugin manually or using WP CLI:
 
 ```shell
-wp plugin activate wp-thumbhash
+wp plugin activate thumbhash-placeholders
 ```
 
 ## Usage

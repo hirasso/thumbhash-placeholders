@@ -9,11 +9,10 @@ declare(strict_types=1);
 namespace Hirasso\WPThumbhash;
 
 use Exception;
-use WP_Error;
 
 class ImageDownloader
 {
-    private const DIR_NAME = 'wp-thumbhash';
+    private const DIR_NAME = 'thumbhash-placeholders';
 
     /**
      * Get the custom dir in /wp-content/uploads/

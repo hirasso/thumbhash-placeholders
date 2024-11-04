@@ -22,10 +22,10 @@ use Isolated\Symfony\Component\Finder\Finder;
 // );
 $excludedFiles = [];
 $copyFiles = [
-    'wp-thumbhash.php',
+    'thumbhash-placeholders.php',
     'readme.txt',
-    'admin/wp-thumbhash.js',
-    'admin/wp-thumbhash.css',
+    'admin/thumbhash-placeholders.js',
+    'admin/thumbhash-placeholders.css',
     'composer.json',
     'composer.lock',
 ];
