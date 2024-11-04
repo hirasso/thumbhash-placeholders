@@ -79,17 +79,25 @@ class Admin
      */
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
-        $thumbhashURL = Plugin::getPlaceholder($id)->dataURI;
+        $thumbhashURL = Plugin::getPlaceholder($id)?->dataURI ?: '';
         $buttonLabel = $thumbhashURL ? __('Regenerate', 'thumbhash-placeholders') : __('Generate', 'thumbhash-placeholders');
 
         ob_start() ?>
 
         <thumbhash-placeholders-field data-id="<?= esc_attr($id) ?>">
             <?php if ($thumbhashURL): ?>
-                <img class="thumbhash-placeholders_image" src="<?= esc_attr($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder', 'thumbhash-placeholders') ?>">
+                <img
+                    class="thumbhash-placeholders_image"
+                    src="<?php echo esc_attr($thumbhashURL) ?>"
+                    alt="<?php esc_attr_e('Thumbhash placeholder', 'thumbhash-placeholders') ?>">
             <?php endif; ?>
 
-            <button data-thumbhash-placeholders-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
+            <button
+                data-thumbhash-placeholders-generate
+                type="button"
+                class="button button-small">
+                <?php esc_html($buttonLabel) ?>
+            </button>
 
             <?php if ($context === AdminContext::REGENERATE): ?>
                 <i aria-hidden="true" data-thumbhash-placeholders-regenerated></i>
@@ -108,7 +116,7 @@ class Admin
     {
         check_ajax_referer(static::$ajaxAction, 'security');
 
-        $id = $_POST['id'] ?? null;
+        $id = intval($_POST['id'] ?? null);
 
         if (empty($id) || !is_numeric($id)) {
             wp_send_json_error([
