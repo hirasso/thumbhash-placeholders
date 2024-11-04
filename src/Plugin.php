@@ -24,7 +24,7 @@ class Plugin
     public static function init()
     {
         // Hook for generating Thumbhash on upload
-        add_action('add_attachment', [self::class, 'generateThumbhashOnUpload']);
+        add_action('add_attachment', [self::class, 'generateThumbhash']);
 
         new WPCLIApplication(
             'thumbhash',

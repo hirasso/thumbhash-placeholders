@@ -96,7 +96,7 @@ class Admin
                 data-thumbhash-placeholders-generate
                 type="button"
                 class="button button-small">
-                <?php esc_html($buttonLabel) ?>
+                <?php echo esc_html($buttonLabel) ?>
             </button>
 
             <?php if ($context === AdminContext::REGENERATE): ?>
