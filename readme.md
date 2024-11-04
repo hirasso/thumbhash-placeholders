@@ -34,8 +34,10 @@ The placeholder object looks like this:
 
 ```
 object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
-  ["url"]=>
+  ["dataURI"]=>
   string(4218) "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAXCAYAAABqBU3hAAAMEElEQVR4AQCBAH7..."
+  ["hash"]=>
+  string(28) "GwgOBYAJdaaGeIi..."
 }
 ```
 
@@ -45,7 +47,7 @@ object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
 <figure>
   <figure>
     <?php if (function_exists('get_thumbhash_placeholder')): ?>
-      <img src="<?php echo get_thumbhash_placeholder($id)->url ?>" aria-hidden="true" alt="">
+      <img src="<?php echo get_thumbhash_placeholder($id)->dataURI ?>" aria-hidden="true" alt="">
     <?php endif; ?>
     <?php echo wp_get_attachment_image($id) ?>
   </figure>

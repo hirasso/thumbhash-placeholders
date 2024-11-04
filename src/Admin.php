@@ -77,7 +77,7 @@ class Admin
      */
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
-        $thumbhashURL = Plugin::getPlaceholder($id)->url;
+        $thumbhashURL = Plugin::getPlaceholder($id)->dataURI;
         $buttonLabel = $thumbhashURL ? __('Regenerate', 'thumbhash-placeholders') : __('Generate', 'thumbhash-placeholders');
 
         ob_start() ?>
