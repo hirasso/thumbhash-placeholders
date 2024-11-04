@@ -22,12 +22,29 @@ wp plugin activate thumbhash-placeholders
 
 ## Usage
 
+### Data Structure
+
+Access the placeholder in your templates:
+
+```php
+$placeholder = get_thumbhash_placeholder($id);
+```
+
+The placeholder object looks like this:
+
+```
+object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
+  ["url"]=>
+  string(4218) "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAXCAYAAABqBU3hAAAMEElEQVR4AQCBAH7..."
+}
+```
+
 ### Markup
 
 ```php
 <figure>
   <figure>
-    <img src="<?= thumbhash($id)->url ?>" aria-hidden="true" alt="">
+    <img src="<?= get_thumbhash_placeholder($id)->url ?>" aria-hidden="true" alt="">
     <?= wp_get_attachment_image($id) ?>
   </figure>
 </figure>
