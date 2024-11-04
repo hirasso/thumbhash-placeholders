@@ -13,6 +13,7 @@ vendor
 # php-scoper
 php-scoper.phar
 scoped
+thumbhash-placeholders
 
 # zip files
 *.zip
