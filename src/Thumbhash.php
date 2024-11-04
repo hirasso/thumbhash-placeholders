@@ -20,6 +20,7 @@ class ThumbHash
     {
         if (!wp_attachment_is_image($id)) {
             return new WP_Error('NOT_AN_IMAGE', sprintf(
+                /* translators: %d is an attachment ID */
                 __('File is not an image: %d', 'thumbhash-placeholders'),
                 intval($id)
             ));
@@ -29,6 +30,7 @@ class ThumbHash
 
         if (!file_exists($file)) {
             return new WP_Error('NOT_FOUND', sprintf(
+                /* translators: %s is a path to a file */
                 __('File not found: %s', 'thumbhash-placeholders'),
                 esc_html($file)
             ));
@@ -67,6 +69,7 @@ class ThumbHash
         } catch (Exception $e) {
 
             return new WP_Error('DECODING_ERROR', sprintf(
+                /* translators: %s is an error message */
                 __('Error decoding thumbhash: %s', 'thumbhash-placeholders'),
                 $e->getMessage()
             ));
