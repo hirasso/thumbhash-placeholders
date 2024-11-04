@@ -25,8 +25,8 @@ final readonly class Placeholder
 
         $this->hash = $this->getHash($attachmentID);
 
-        $decoded = Thumbhash::decode($this->hash);
-        $this->dataURI = esc_url($decoded, ['data']);
+        $uri = Thumbhash::getDataURI($this->hash);
+        $this->dataURI = esc_url($uri, ['data']);
     }
 
     /**

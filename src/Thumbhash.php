@@ -16,19 +16,29 @@ class ThumbHash
     /**
      * Generate a thumbhash from an attachment
      */
-    public static function encode(int $id): string
+    public static function encode(int $id): string|WP_Error
     {
-        $file = static::getImage($id);
+        $file = static::getImageFile($id);
+
+        if (!file_exists($file)) {
+            return new WP_Error('NOT_FOUND', sprintf(
+                __('File not found: %s', 'thumbhash-placeholders'),
+                esc_html($file)
+            ));
+        }
 
         if (!wp_attachment_is_image($id)) {
-            throw new Exception("File is not an image: $id");
+            return new WP_Error('NOT_AN_IMAGE', sprintf(
+                __('File is not an image: %d', 'thumbhash-placeholders'),
+                intval($id)
+            ));
         }
 
         /** @var WP_Image_Editor|WP_Error */
         $editor = wp_get_image_editor($file);
 
         if (is_wp_error($editor)) {
-            throw new Exception($editor->get_error_message());
+            return $editor;
         }
 
         [$width, $height, $pixels] = static::extractSizeAndPixels(
@@ -43,25 +53,31 @@ class ThumbHash
     /**
      * Decode a stored hash
      */
-    public static function decode(string $storedHash): ?string
+    public static function getDataURI(string $hashString): string|null|WP_Error
     {
-        if (!$storedHash) {
+        if (empty($hashString)) {
             return null;
         }
 
         try {
-            $hash = ThumbhashLib::convertStringToHash($storedHash);
 
-            return ThumbhashLib::toDataURL($hash);
-        } catch (\Exception $e) {
-            throw new \Exception("Error decoding thumbhash: {$e->getMessage()}");
+            $hashArray = ThumbhashLib::convertStringToHash($hashString);
+            return ThumbhashLib::toDataURL($hashArray);
+
+        } catch (Exception $e) {
+
+            return new WP_Error('DECODING_ERROR', sprintf(
+                __('Error decoding thumbhash: %s', 'thumbhash-placeholders'),
+                $e->getMessage()
+            ));
+
         }
     }
 
     /**
      * Get an image. Attempt to download it if it doesn't exist locally
      */
-    private static function getImage(int $id): string
+    private static function getImageFile(int $id): string
     {
         $file = get_attached_file($id);
 
@@ -70,10 +86,6 @@ class ThumbHash
         }
 
         $file = ImageDownloader::downloadImage(wp_get_attachment_url($id));
-
-        if (!file_exists($file)) {
-            throw new Exception("File doesn't exist: $id");
-        }
 
         return $file;
     }
@@ -109,7 +121,7 @@ class ThumbHash
         return match ($editor::class) {
             'WP_Image_Editor_Imagick' => ImageDriver::IMAGICK,
             'WP_Image_Editor_GD' => ImageDriver::GD,
-            default => throw new Exception("Unsupported image driver: " . $editor::class)
+            default => throw new Exception("Unsupported image driver")
         };
     }
 }
