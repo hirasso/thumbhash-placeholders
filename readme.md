@@ -44,8 +44,10 @@ object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
 ```php
 <figure>
   <figure>
-    <img src="<?= get_thumbhash_placeholder($id)->url ?>" aria-hidden="true" alt="">
-    <?= wp_get_attachment_image($id) ?>
+    <?php if (function_exists('get_thumbhash_placeholder')): ?>
+      <img src="<?php echo get_thumbhash_placeholder($id)->url ?>" aria-hidden="true" alt="">
+    <?php endif; ?>
+    <?php echo wp_get_attachment_image($id) ?>
   </figure>
 </figure>
 ```
