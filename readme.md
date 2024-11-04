@@ -4,7 +4,7 @@
 
 ## How it works
 
-This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automatically generate a small blurry placeholder image for each image uploaded. In your frontend templates, you can access the image placeholder as a data URI string to display while the high-quality image is loading.
+This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automatically generate a small blurry placeholder image for each image during upload. That image placeholder can be rendered as a data URI string to display while the high-quality image is loading.
 
 ## Installation
 
