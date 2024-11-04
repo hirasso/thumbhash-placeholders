@@ -73,7 +73,7 @@ figure img[aria-hidden="true"] {
 
 ### `thumbhash generate`
 
-Generate placeholders for existing images.
+Generate placeholders for all or selected images. Pass `--force` to re-generate.
 
 ```
 wp thumbhash generate [<ids>...] [--force]
