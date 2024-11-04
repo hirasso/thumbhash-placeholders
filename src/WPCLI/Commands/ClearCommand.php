@@ -94,14 +94,4 @@ class ClearCommand extends Command
 
         return Command::SUCCESS;
     }
-
-    /**
-     * Create a status line, for example:
-     * image.jpg ..................................................... generated ✔︎
-     */
-    private function getStatusLine(string $start, string $end): string
-    {
-        $dots = str_repeat('.', max(0, 70 - strlen($start)));
-        return "$start $dots $end";
-    }
 }
