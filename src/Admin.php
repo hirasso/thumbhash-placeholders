@@ -84,7 +84,7 @@ class Admin
 
         <thumbhash-placeholders-field data-id="<?= esc_attr($id) ?>">
             <?php if ($thumbhashURL): ?>
-                <img class="thumbhash-placeholders_image" src="<?= esc_attr($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder') ?>">
+                <img class="thumbhash-placeholders_image" src="<?= esc_attr($thumbhashURL) ?>" alt="<?= _e('Thumbhash placeholder', 'thumbhash-placeholders') ?>">
             <?php endif; ?>
 
             <button data-thumbhash-placeholders-generate type="button" class="button button-small"><?= $buttonLabel ?></button>
