@@ -8,6 +8,11 @@
             "Hirasso\\ThumbhashPlaceholders\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Hirasso\\ComposerActions\\": "actions/"
+        }
+    },
     "authors": [
         {
             "name": "Rasso Hilber",
@@ -37,10 +42,13 @@
             "composer install --no-dev --prefer-dist"
         ],
         "scoped-package:create": [
-            "composer scoped-package:prepare",
+            "composer run-script scoped-package:prepare",
             "php php-scoper.phar add-prefix --force",
             "composer dump-autoload --working-dir scoped --classmap-authoritative",
-            "rm scoped/composer.json scoped/composer.lock"
-        ]
+            "rm scoped/composer.json scoped/composer.lock",
+            "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
+            "composer run-script scoped-package:postprocess"
+        ],
+        "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess"
     }
 }
