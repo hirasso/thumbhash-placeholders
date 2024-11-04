@@ -18,19 +18,19 @@ class ThumbHash
      */
     public static function encode(int $id): string|WP_Error
     {
+        if (!wp_attachment_is_image($id)) {
+            return new WP_Error('NOT_AN_IMAGE', sprintf(
+                __('File is not an image: %d', 'thumbhash-placeholders'),
+                intval($id)
+            ));
+        }
+
         $file = static::getImageFile($id);
 
         if (!file_exists($file)) {
             return new WP_Error('NOT_FOUND', sprintf(
                 __('File not found: %s', 'thumbhash-placeholders'),
                 esc_html($file)
-            ));
-        }
-
-        if (!wp_attachment_is_image($id)) {
-            return new WP_Error('NOT_AN_IMAGE', sprintf(
-                __('File is not an image: %d', 'thumbhash-placeholders'),
-                intval($id)
             ));
         }
 
