@@ -25,8 +25,10 @@ class Admin
      */
     public static function enqueueAssets(): void
     {
+        // phpcs:disable WordPress.WP.EnqueuedResourceParameters.MissingVersion -- the version is derived from the filemtime
         wp_enqueue_style('thumbhash-placeholders-admin', self::assetUri('/admin/thumbhash-placeholders.css'), [], null);
         wp_enqueue_script('thumbhash-placeholders-admin', self::assetUri('/admin/thumbhash-placeholders.js'), ['jquery'], null, true);
+        // phpcs:enable WordPress.WP.EnqueuedResourceParameters.MissingVersion
         wp_localize_script('thumbhash-placeholders-admin', 'wpThumbhash', [
             'ajax' => [
                 'url' => admin_url('admin-ajax.php'),
