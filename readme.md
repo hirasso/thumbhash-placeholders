@@ -2,6 +2,8 @@
 
 **A WordPress plugin to generate image placeholders for smoother lazyloading 🎨**
 
+https://github.com/hirasso/thumbhash-placeholders/actions/workflows/test.yml/badge.svg
+
 ## How it works
 
 This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automatically generate a small blurry placeholder image for each image during upload. That image placeholder can be rendered as a data URI string to display while the high-quality image is loading.
