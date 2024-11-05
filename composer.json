@@ -1,8 +1,25 @@
 {
     "name": "hirasso/thumbhash-placeholders",
     "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
-    "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Rasso Hilber",
+            "email": "mail@rassohilber.com"
+        }
+    ],
+    "require": {
+        "snicco/better-wp-cli": "^1.2",
+        "sniccowp/php-scoper-wordpress-excludes": "dev-master",
+        "srwiez/thumbhash": "dev-master"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "dev-main",
+        "friendsofphp/php-cs-fixer": "dev-master",
+        "yoast/wp-test-utils": "^1.0@dev"
+    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Hirasso\\ThumbhashPlaceholders\\": "src/"
@@ -13,34 +30,15 @@
             "Hirasso\\ComposerActions\\": "actions/"
         }
     },
-    "authors": [
-        {
-            "name": "Rasso Hilber",
-            "email": "mail@rassohilber.com"
-        }
-    ],
     "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "require": {
-        "snicco/better-wp-cli": "^1.2",
-        "sniccowp/php-scoper-wordpress-excludes": "dev-master",
-        "srwiez/thumbhash": "dev-master"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "dev-master"
-    },
     "scripts": {
-        "scoped-package:prepare": [
-            "rm -rf vendor scoped",
-            "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
-            "chmod +x php-scoper.phar",
-            "php php-scoper.phar --version",
-            "composer install --no-dev --prefer-dist"
-        ],
         "scoped-package:create": [
             "composer run-script scoped-package:prepare",
             "php php-scoper.phar add-prefix --force",
@@ -49,6 +47,14 @@
             "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
             "composer run-script scoped-package:postprocess"
         ],
-        "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess"
-    }
+        "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess",
+        "scoped-package:prepare": [
+            "rm -rf vendor scoped",
+            "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
+            "chmod +x php-scoper.phar",
+            "php php-scoper.phar --version",
+            "composer install --no-dev --prefer-dist"
+        ]
+    },
+    "post-install-cmd": "composer normalize"
 }

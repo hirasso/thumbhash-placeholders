@@ -1,0 +1,12 @@
+{
+    "core": "WordPress/WordPress",
+    "plugins": [ "." ],
+    "env": {
+        "development": {
+            "phpVersion": "8.2"
+        },
+        "tests": {
+            "phpVersion": "8.2"
+        }
+    }
+}
