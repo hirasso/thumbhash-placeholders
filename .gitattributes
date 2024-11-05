@@ -13,6 +13,7 @@
 /pnpm-lock.yaml export-ignore
 /package.json export-ignore
 /jsconfig.json export-ignore
+/composer.lock export-ignore
 /scoper.inc.php export-ignore
 /TODO export-ignore
 /php-scoper.phar export-ignore
