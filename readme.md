@@ -2,7 +2,7 @@
 
 **A WordPress plugin to generate image placeholders for smoother lazyloading 🎨**
 
-https://github.com/hirasso/thumbhash-placeholders/actions/workflows/test.yml/badge.svg
+![Tests](https://github.com/hirasso/thumbhash-placeholders/actions/workflows/test.yml/badge.svg)
 
 ## How it works
 
