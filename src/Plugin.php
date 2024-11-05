@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\ThumbhashPlaceholders;
+namespace Hirasso\WP\ThumbhashPlaceholders;
 
-use Hirasso\ThumbhashPlaceholders\WPCLI\Commands\ClearCommand;
-use Hirasso\ThumbhashPlaceholders\WPCLI\WPCLIApplication;
-use Hirasso\ThumbhashPlaceholders\WPCLI\Commands\GenerateCommand;
+use Hirasso\WP\ThumbhashPlaceholders\WPCLI\Commands\ClearCommand;
+use Hirasso\WP\ThumbhashPlaceholders\WPCLI\WPCLIApplication;
+use Hirasso\WP\ThumbhashPlaceholders\WPCLI\Commands\GenerateCommand;
 use WP_Post;
 
 class Plugin

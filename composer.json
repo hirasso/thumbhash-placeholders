@@ -1,60 +1,72 @@
 {
-    "name": "hirasso/thumbhash-placeholders",
-    "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
-    "license": "GPL-3.0-or-later",
-    "type": "wordpress-plugin",
-    "authors": [
-        {
-            "name": "Rasso Hilber",
-            "email": "mail@rassohilber.com"
-        }
+  "name": "hirasso/thumbhash-placeholders",
+  "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
+  "license": "GPL-3.0-or-later",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Rasso Hilber",
+      "email": "mail@rassohilber.com"
+    }
+  ],
+  "require": {
+    "snicco/better-wp-cli": "^1.2",
+    "sniccowp/php-scoper-wordpress-excludes": "dev-master",
+    "srwiez/thumbhash": "dev-master"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "dev-main",
+    "friendsofphp/php-cs-fixer": "dev-master",
+    "symfony/var-dumper": "7.2.x-dev",
+    "wp-phpunit/wp-phpunit": "dev-master",
+    "yoast/wp-test-utils": "^1.0@dev"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Hirasso\\WP\\ThumbhashPlaceholders\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Hirasso\\WP\\ComposerActions\\": "composer-actions/",
+      "Hirasso\\WP\\ThumbhashPlaceholders\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    },
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "scripts": {
+    "scoped-package:create": [
+      "composer run-script scoped-package:prepare",
+      "php php-scoper.phar add-prefix --force",
+      "composer dump-autoload --working-dir scoped --classmap-authoritative",
+      "rm scoped/composer.json scoped/composer.lock",
+      "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
+      "composer run-script scoped-package:postprocess"
     ],
-    "require": {
-        "snicco/better-wp-cli": "^1.2",
-        "sniccowp/php-scoper-wordpress-excludes": "dev-master",
-        "srwiez/thumbhash": "dev-master"
-    },
-    "require-dev": {
-        "ergebnis/composer-normalize": "dev-main",
-        "friendsofphp/php-cs-fixer": "dev-master",
-        "yoast/wp-test-utils": "^1.0@dev"
-    },
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "Hirasso\\ThumbhashPlaceholders\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Hirasso\\ComposerActions\\": "composer-actions/"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true
-        },
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "scripts": {
-        "scoped-package:create": [
-            "composer run-script scoped-package:prepare",
-            "php php-scoper.phar add-prefix --force",
-            "composer dump-autoload --working-dir scoped --classmap-authoritative",
-            "rm scoped/composer.json scoped/composer.lock",
-            "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
-            "composer run-script scoped-package:postprocess"
-        ],
-        "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess",
-        "scoped-package:prepare": [
-            "rm -rf vendor scoped",
-            "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
-            "chmod +x php-scoper.phar",
-            "php php-scoper.phar --version",
-            "composer install --no-dev --prefer-dist"
-        ]
-    },
-    "post-install-cmd": "composer normalize"
+    "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess",
+    "scoped-package:prepare": [
+      "rm -rf vendor scoped",
+      "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
+      "chmod +x php-scoper.phar",
+      "php php-scoper.phar --version",
+      "composer install --no-dev --prefer-dist"
+    ],
+    "test:unit": [
+      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage"
+    ],
+    "test:wp": [
+      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
+    ],
+    "test": [
+      "npx wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders composer test:wp && composer test:unit"
+    ]
+  },
+  "post-install-cmd": "composer normalize"
 }

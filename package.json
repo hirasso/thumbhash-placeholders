@@ -8,7 +8,7 @@
     "readme:generate": "curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php",
     "wp-env": "wp-env",
     "wp-env:restart": "wp-env stop && wp-env start",
-    "test:unit": "wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders ./vendor/bin/phpunit"
+    "test": "wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders composer test:wp"
   },
   "devDependencies": {
     "@wordpress/env": "^10.11.0",

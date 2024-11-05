@@ -17,3 +17,7 @@ thumbhash-placeholders
 
 # zip files
 *.zip
+
+# phpunit
+.phpunit.result.cache
+*.xml.dist.bak

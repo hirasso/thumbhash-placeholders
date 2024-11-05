@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\ThumbhashPlaceholders\Enums;
+namespace Hirasso\WP\ThumbhashPlaceholders\Enums;
 
 enum AdminContext: string
 {

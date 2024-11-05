@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\ComposerActions;
+namespace Hirasso\WP\ComposerActions;
 
 use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;

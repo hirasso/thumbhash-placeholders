@@ -22,15 +22,19 @@
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-use Hirasso\ThumbhashPlaceholders\Placeholder;
-use Hirasso\ThumbhashPlaceholders\Plugin;
+use Hirasso\WP\ThumbhashPlaceholders\Placeholder;
+use Hirasso\WP\ThumbhashPlaceholders\Plugin;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-define('WP_THUMBHASH_PLUGIN_URI', untrailingslashit(plugin_dir_url(__FILE__)));
-define('WP_THUMBHASH_PLUGIN_DIR', untrailingslashit(__DIR__));
+if (! defined('THUMBHASH_PLACEHOLDERS_PLUGIN_URI')) {
+    define('THUMBHASH_PLACEHOLDERS_PLUGIN_URI', untrailingslashit(plugin_dir_url(__FILE__)));
+}
+if (! defined('THUMBHASH_PLACEHOLDERS_PLUGIN_DIR')) {
+    define('THUMBHASH_PLACEHOLDERS_PLUGIN_DIR', untrailingslashit(__DIR__));
+}
 
 if (is_readable(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';

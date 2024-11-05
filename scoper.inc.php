@@ -118,7 +118,7 @@ return [
     //
     // For more information see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#excluded-symbols
     'exclude-namespaces' => [
-        'Hirasso',                     // The Acme\Foo namespace (and sub-namespaces),
+        'Hirasso\\WP\\ThumbhashPlaceholders', // The Acme\Foo namespace (and sub-namespaces),
         // '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
         // '~^$~',                        // The root namespace only
         // '',                            // Any namespace
@@ -140,7 +140,7 @@ return [
     'expose-global-classes' => true,
     'expose-global-functions' => true,
     'expose-namespaces' => [
-        'Hirasso',                     // The Acme\Foo namespace (and sub-namespaces)
+        'Hirasso\\WP\\ThumbhashPlaceholders', // The Acme\Foo namespace (and sub-namespaces)
         // '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
         // '~^$~',                        // The root namespace only
         // '',                            // Any namespace

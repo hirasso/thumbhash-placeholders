@@ -1,10 +1,10 @@
 <?php
 
-namespace Hirasso\ThumbhashPlaceholders\WPCLI\Commands;
+namespace Hirasso\WP\ThumbhashPlaceholders\WPCLI\Commands;
 
-use Hirasso\ThumbhashPlaceholders\Plugin;
-use Hirasso\ThumbhashPlaceholders\WPCLI\InputValidator;
-use Hirasso\ThumbhashPlaceholders\WPCLI\Utils;
+use Hirasso\WP\ThumbhashPlaceholders\Plugin;
+use Hirasso\WP\ThumbhashPlaceholders\WPCLI\InputValidator;
+use Hirasso\WP\ThumbhashPlaceholders\WPCLI\Utils;
 use Snicco\Component\BetterWPCLI\Command;
 use Snicco\Component\BetterWPCLI\Input\Input;
 use Snicco\Component\BetterWPCLI\Output\Output;

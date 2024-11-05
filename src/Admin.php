@@ -4,9 +4,9 @@
  * https://rassohilber.com
  */
 
-namespace Hirasso\ThumbhashPlaceholders;
+namespace Hirasso\WP\ThumbhashPlaceholders;
 
-use Hirasso\ThumbhashPlaceholders\Enums\AdminContext;
+use Hirasso\WP\ThumbhashPlaceholders\Enums\AdminContext;
 use WP_Post;
 
 class Admin
@@ -43,8 +43,8 @@ class Admin
      */
     private static function assetUri(string $path): string
     {
-        $uri = WP_THUMBHASH_PLUGIN_URI . '/' . ltrim($path, '/');
-        $file = WP_THUMBHASH_PLUGIN_DIR . '/' . ltrim($path, '/');
+        $uri = THUMBHASH_PLACEHOLDERS_PLUGIN_URI . '/' . ltrim($path, '/');
+        $file = THUMBHASH_PLACEHOLDERS_PLUGIN_DIR . '/' . ltrim($path, '/');
 
         if (file_exists($file)) {
             $version = filemtime($file);

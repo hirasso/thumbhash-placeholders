@@ -33,7 +33,7 @@ $placeholder = get_thumbhash_placeholder($id);
 The placeholder object looks like this:
 
 ```
-object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
+object(Hirasso\WP\ThumbhashPlaceholders\Placeholder)#2491 (1) {
   ["dataURI"]=>
   string(4218) "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAXCAYAAABqBU3hAAAMEElEQVR4AQCBAH7..."
   ["hash"]=>

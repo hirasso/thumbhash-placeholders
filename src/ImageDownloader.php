@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\ThumbhashPlaceholders;
+namespace Hirasso\WP\ThumbhashPlaceholders;
 
 use WP_Error;
 use WP_Filesystem_Direct;

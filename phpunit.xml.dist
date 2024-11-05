@@ -1,16 +1,23 @@
-<?xml version="1.0"?>
-<phpunit
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  bootstrap="tests/bootstrap.php"
-  backupGlobals="false"
-  colors="true"
-  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd">
-  <php>
-    <env name="WORDPRESS_TABLE_PREFIX" value="wp_"/>
-  </php>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" backupStaticAttributes="false" bootstrap="tests/Unit/bootstrap.php" colors="true" convertDeprecationsToExceptions="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" forceCoversAnnotation="true" processIsolation="false" stopOnError="false" stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false" verbose="true">
+  <coverage includeUncoveredFiles="true" processUncoveredFiles="false">
+    <include>
+      <file>./admin-functions.php</file>
+      <file>./common-functions.php</file>
+      <file>./duplicate-post.php</file>
+      <file>./options.php</file>
+      <directory>./compat</directory>
+      <directory>./src</directory>
+    </include>
+    <report>
+      <clover outputFile="build/logs/clover.xml"/>
+      <text outputFile="php://stdout" showOnlySummary="true"/>
+    </report>
+  </coverage>
   <testsuites>
-    <testsuite name="default">
-      <directory prefix="test-" suffix=".php">tests/</directory>
+    <testsuite name="duplicatepost">
+      <directory suffix="Test.php">./tests/Unit</directory>
     </testsuite>
   </testsuites>
+  <logging/>
 </phpunit>
