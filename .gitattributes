@@ -1,7 +1,7 @@
 # Define git attributes per path
 # https://git-scm.com/docs/gitattributes
 
-# Exclude tests and docs from dist archives
+# Exclude unneccessary files from release
 /.editorconfig export-ignore
 /.gitattributes export-ignore
 /.github export-ignore
@@ -16,4 +16,10 @@
 /scoper.inc.php export-ignore
 /TODO export-ignore
 /php-scoper.phar export-ignore
+/scoped export-ignore
 /composer-actions export-ignore
+/TODO export-ignore
+/phpunit-wp.xml.dist export-ignore
+/phpunit.xml.dist export-ignore
+/tests export-ignore
+/.wp-env.json export-ignore
