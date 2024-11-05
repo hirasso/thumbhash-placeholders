@@ -33,6 +33,7 @@ on:
       - '!config/scripts/install-wp-tests.sh'
       - 'css/**'
       - 'js/**'
+
   pull_request:
     paths-ignore:
       - '**.css'
@@ -77,11 +78,11 @@ jobs:
         coverage: [false]
 
         # Run code coverage only on high/low PHP.
-        include:
-        - php_version: 7.2
-          coverage: true
-        - php_version: 8.3
-          coverage: true
+        # include:
+        # - php_version: 8.2
+        #   coverage: true
+        # - php_version: 8.3
+        #   coverage: true
 
     name: "Unit Test: PHP ${{ matrix.php_version }}"
 
