@@ -22,11 +22,7 @@ class ThumbHash
         string $mimeType
     ): string {
         if (!file_exists($file)) {
-            throw new RuntimeException(sprintf(
-                /* translators: %s is a path to a file */
-                __('File not found: %s', 'thumbhash-placeholders'),
-                esc_html($file)
-            ));
+            throw new RuntimeException(sprintf('File not found: %s', $file));
         }
 
         /** @var WP_Image_Editor|WP_Error */
@@ -63,11 +59,7 @@ class ThumbHash
             return ThumbhashLib::toDataURL($hashArray);
         } catch (Exception $e) {
 
-            throw new RuntimeException(sprintf(
-                /* translators: %s is an exception message */
-                __('Error decoding thumbhash: %s', 'thumbhash-placeholders'),
-                $e->getMessage()
-            ));
+            throw new RuntimeException(sprintf('Error decoding thumbhash: %s', $e->getMessage()));
         }
     }
 
@@ -84,14 +76,14 @@ class ThumbHash
         $tempFile = wp_tempnam();
 
         if (is_wp_error($saved = $editor->save($tempFile, $mimeType))) {
-            throw new \RuntimeException('Failed to save resized image.');
+            throw new RuntimeException('Failed to save resized image.');
         }
 
         $file = $saved['path'];
 
         // Check if the file exists and is readable
         if (!file_exists($file) || !is_readable($file)) {
-            throw new \RuntimeException('Temporary image file is not accessible.');
+            throw new RuntimeException('Temporary image file is not accessible.');
         }
 
         // Get the raw image data
@@ -113,7 +105,7 @@ class ThumbHash
         return match ($driver) {
             ImageDriver::IMAGICK => extract_size_and_pixels_with_imagick($image),
             ImageDriver::GD => extract_size_and_pixels_with_gd($image),
-            default => throw new Exception("Couldn't generate thumbhash data")
+            default => throw new RuntimeException("Couldn't generate thumbhash data")
         };
     }
 
@@ -126,7 +118,7 @@ class ThumbHash
         return match ($editor::class) {
             'WP_Image_Editor_Imagick' => ImageDriver::IMAGICK,
             'WP_Image_Editor_GD' => ImageDriver::GD,
-            default => throw new Exception("Unsupported image driver")
+            default => throw new RuntimeException("Unsupported image driver")
         };
     }
 }
