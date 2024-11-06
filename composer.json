@@ -68,6 +68,9 @@
     ],
     "test": [
       "npx wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders composer test:wp && composer test:unit"
+    ],
+    "test:watch": [
+      "ls tests/**/*.php | entr composer test"
     ]
   },
   "post-install-cmd": "composer normalize"
