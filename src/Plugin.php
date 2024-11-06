@@ -26,6 +26,7 @@ class Plugin
     {
         // Hook for generating Thumbhash on upload
         add_action('add_attachment', [self::class, 'generateThumbhash']);
+        add_action('plugins_loaded', [self::class, 'loadTextDomain']);
 
         new WPCLIApplication(
             'thumbhash',
@@ -36,6 +37,13 @@ class Plugin
         );
 
         Admin::init();
+    }
+
+    /**
+     * Load the plugin text domain manually, so that it prevails over the folder name (it's "scoped" during tests)
+     */
+    public static function loadTextDomain(): void {
+        load_plugin_textdomain('thumbhash-placeholders', false, static::getAssetPath('/languages'));
     }
 
     /**
