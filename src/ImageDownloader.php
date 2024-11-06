@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Hirasso\WP\ThumbhashPlaceholders;
 
 use RuntimeException;
-use WP_Filesystem_Direct;
 
 class ImageDownloader
 {
@@ -36,28 +35,24 @@ class ImageDownloader
         $response = wp_remote_get($url, ['timeout' => 300]);
 
         if (is_wp_error($response)) {
-            throw new RuntimeException($response->get_error_message());
+            throw new RuntimeException(esc_html($response->get_error_message()));
         }
 
         $responseCode = wp_remote_retrieve_response_code($response);
         if ($responseCode !== 200) {
             throw new RuntimeException(sprintf(
-                __('Failed to download image. Response Code: %s'),
+                'Failed to download image. Response Code: %s',
                 esc_html($responseCode)
             ));
         }
 
-        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
-
-        WP_Filesystem();
-        $filesystem = new WP_Filesystem_Direct(true);
+        $fs = Utils::getFilesystem();
 
         $filename = uniqid() . '-' . basename($url);
         $file = static::getDir() . "/$filename";
         $fileContents = wp_remote_retrieve_body($response);
 
-        if ($filesystem->put_contents($file, $fileContents, FS_CHMOD_FILE) === false) {
+        if ($fs->put_contents($file, $fileContents, FS_CHMOD_FILE) === false) {
             throw new RuntimeException('Failed to write file to uploads directory');
         }
 

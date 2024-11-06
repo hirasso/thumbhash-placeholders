@@ -22,7 +22,7 @@ class ThumbHash
         string $mimeType
     ): string {
         if (!file_exists($file)) {
-            throw new RuntimeException(sprintf('File not found: %s', $file));
+            throw new RuntimeException(sprintf('File not found: %s', esc_html($file)));
         }
 
         /** @var WP_Image_Editor|WP_Error */
@@ -59,7 +59,7 @@ class ThumbHash
             return ThumbhashLib::toDataURL($hashArray);
         } catch (Exception $e) {
 
-            throw new RuntimeException(sprintf('Error decoding thumbhash: %s', $e->getMessage()));
+            throw new RuntimeException(sprintf('Error decoding thumbhash: %s', esc_html($e->getMessage())));
         }
     }
 
@@ -81,13 +81,16 @@ class ThumbHash
 
         $file = $saved['path'];
 
+        $fs = Utils::getFilesystem();
+
         // Check if the file exists and is readable
-        if (!file_exists($file) || !is_readable($file)) {
+        if (!$fs->exists($file) || !$fs->is_readable($file)) {
             throw new RuntimeException('Temporary image file is not accessible.');
         }
 
         // Get the raw image data
-        $imageData = file_get_contents($file);
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents --- this file is always local
+        $imageData = $fs->get_contents($file);
 
         // Clean up the temporary file
         wp_delete_file($tempFile);

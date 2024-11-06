@@ -43,7 +43,8 @@ class Plugin
      * Load the plugin text domain manually, so that it prevails over the folder name (it's "scoped" during tests)
      */
     public static function loadTextDomain(): void {
-        load_plugin_textdomain('thumbhash-placeholders', false, static::getAssetPath('/languages'));
+        // phpcs:ignore WordPress.WP.DeprecatedParameters.Load_plugin_textdomainParam2Found -- plugin-check fails here
+        load_plugin_textdomain('thumbhash-placeholders', '', static::getAssetPath('/languages'));
     }
 
     /**
