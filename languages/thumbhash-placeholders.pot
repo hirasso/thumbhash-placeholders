@@ -1,0 +1,75 @@
+# Copyright (C) 2024 Rasso Hilber
+# This file is distributed under the GPL-3.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: ThumbHash Placeholders 0.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/thumbhash-placeholders\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-11-06T20:30:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: thumbhash-placeholders\n"
+
+#. Plugin Name of the plugin
+#: thumbhash-placeholders.php
+msgid "ThumbHash Placeholders"
+msgstr ""
+
+#. Description of the plugin
+#: thumbhash-placeholders.php
+msgid "Generate image placeholders for smoother lazyloading 🎨"
+msgstr ""
+
+#. Author of the plugin
+#: thumbhash-placeholders.php
+msgid "Rasso Hilber"
+msgstr ""
+
+#. Author URI of the plugin
+#: thumbhash-placeholders.php
+msgid "https://rassohilber.com/"
+msgstr ""
+
+#: src/Admin.php:55
+#: thumbhash-placeholders/src/Admin.php:53
+msgid "Placeholder"
+msgstr ""
+
+#: src/Admin.php:69
+#: thumbhash-placeholders/src/Admin.php:62
+msgid "Regenerate"
+msgstr ""
+
+#: src/Admin.php:69
+#: thumbhash-placeholders/src/Admin.php:62
+msgid "Generate"
+msgstr ""
+
+#: src/Admin.php:78
+#: thumbhash-placeholders/src/Admin.php:78
+msgid "Thumbhash placeholder"
+msgstr ""
+
+#. translators: %s is a path to a file
+#. translators: %d is an attachment ID
+#: src/Plugin.php:58
+#: thumbhash-placeholders/src/Thumbhash.php:22
+msgid "File is not an image: %d"
+msgstr ""
+
+#. translators: %s is a path to a file
+#: src/ThumbHash.php:27
+#: thumbhash-placeholders/src/Thumbhash.php:30
+msgid "File not found: %s"
+msgstr ""
+
+#. translators: %s is an exception message
+#. translators: %s is an error message
+#: src/ThumbHash.php:68
+#: thumbhash-placeholders/src/Thumbhash.php:57
+msgid "Error decoding thumbhash: %s"
+msgstr ""
