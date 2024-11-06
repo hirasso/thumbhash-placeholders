@@ -28,7 +28,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Hirasso\\WP\\ComposerActions\\": "composer-actions/",
+      "Hirasso\\WP\\ComposerActions\\": "config/composer",
       "Hirasso\\WP\\ThumbhashPlaceholders\\Tests\\": "tests/"
     }
   },
@@ -73,17 +73,27 @@
       "ls tests/**/*.php | entr composer test"
     ],
     "plugin:check": [
-        "composer scoped-package:create",
-        "zip -r scoped.zip scoped",
-        "wp plugin deactivate scoped || true",
-        "wp plugin uninstall scoped || true",
-        "wp plugin install scoped.zip --activate",
-        "wp plugin check scoped"
+      "composer scoped-package:create",
+      "zip -r scoped.zip scoped",
+      "wp plugin deactivate scoped || true",
+      "wp plugin uninstall scoped || true",
+      "wp plugin install scoped.zip --activate",
+      "wp plugin check scoped"
     ],
     "make-pot": [
-        "rm -rf scoped",
-        "wp i18n make-pot . languages/thumbhash-placeholders.pot"
+      "rm -rf scoped",
+      "wp i18n make-pot . languages/thumbhash-placeholders.pot"
+    ],
+    "test:dist-archive": [
+      "wp package install wp-cli/dist-archive-command",
+      "config/scripts/generate-distignore.sh",
+      "wp dist-archive . $(basename \"$(pwd)\").zip"
     ]
+  },
+  "scripts-descriptions": {
+    "plugin:check": "check the plugin using plugin-check",
+    "make-pot": "Update the pot file for translations",
+    "test:dist-archive": "Test what will be landing on the WP.org repository"
   },
   "post-install-cmd": "composer normalize"
 }
