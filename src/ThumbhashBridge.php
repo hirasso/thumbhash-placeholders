@@ -7,12 +7,12 @@ use Hirasso\WP\ThumbhashPlaceholders\Enums\ImageDriver;
 use RuntimeException;
 use WP_Image_Editor;
 use WP_Error;
-use Thumbhash\Thumbhash as ThumbhashLib;
+use Thumbhash\Thumbhash;
 
 use function Thumbhash\extract_size_and_pixels_with_gd;
 use function Thumbhash\extract_size_and_pixels_with_imagick;
 
-class ThumbHash
+class ThumbhashBridge
 {
     /**
      * Generate a thumbhash from a file
@@ -39,8 +39,8 @@ class ThumbHash
             image: static::getDownsizedImage($editor, get_post_mime_type($file, $mimeType))
         );
 
-        $hash = ThumbhashLib::RGBAToHash($width, $height, $pixels);
-        return ThumbhashLib::convertHashToString($hash);
+        $hash = Thumbhash::RGBAToHash($width, $height, $pixels);
+        return Thumbhash::convertHashToString($hash);
     }
 
     /**
@@ -55,8 +55,8 @@ class ThumbHash
 
         try {
 
-            $hashArray = ThumbhashLib::convertStringToHash($hashString);
-            return ThumbhashLib::toDataURL($hashArray);
+            $hashArray = Thumbhash::convertStringToHash($hashString);
+            return Thumbhash::toDataURL($hashArray);
         } catch (Exception $e) {
 
             throw new RuntimeException(sprintf('Error decoding thumbhash: %s', esc_html($e->getMessage())));

@@ -42,7 +42,8 @@ class Plugin
     /**
      * Load the plugin text domain manually, so that it prevails over the folder name (it's "scoped" during tests)
      */
-    public static function loadTextDomain(): void {
+    public static function loadTextDomain(): void
+    {
         // phpcs:ignore WordPress.WP.DeprecatedParameters.Load_plugin_textdomainParam2Found -- plugin-check fails here
         load_plugin_textdomain('thumbhash-placeholders', '', static::getAssetPath('/languages'));
     }
@@ -75,7 +76,7 @@ class Plugin
             return $file;
         }
 
-        $hash = Thumbhash::encode($file, $mimeType);
+        $hash = ThumbhashBridge::encode($file, $mimeType);
 
         $downloader?->destroy();
 
@@ -103,7 +104,7 @@ class Plugin
             return null;
         }
 
-        $uri = Thumbhash::getDataURI($hash);
+        $uri = ThumbhashBridge::getDataURI($hash);
 
         if (is_wp_error($uri)) {
             return null;
