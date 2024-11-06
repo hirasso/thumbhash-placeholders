@@ -71,6 +71,18 @@
     ],
     "test:watch": [
       "ls tests/**/*.php | entr composer test"
+    ],
+    "plugin:check": [
+        "composer scoped-package:create",
+        "zip -r scoped.zip scoped",
+        "wp plugin deactivate scoped || true",
+        "wp plugin uninstall scoped || true",
+        "wp plugin install scoped.zip --activate",
+        "wp plugin check scoped"
+    ],
+    "make-pot": [
+        "rm -rf scoped",
+        "wp i18n make-pot . languages/thumbhash-placeholders.pot"
     ]
   },
   "post-install-cmd": "composer normalize"
