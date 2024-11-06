@@ -67,7 +67,7 @@ final class PluginTest extends WPTestCase
         /** Filter the attached file name so that it can't be found */
         add_filter(
             'get_attached_file',
-            fn ($file) => uniqid() . $file
+            fn ($file) => 'i-do-not-exist.jpg'
         );
 
         /** Required for internal remote_get calls in docker */
