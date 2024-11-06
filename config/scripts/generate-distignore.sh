@@ -35,3 +35,9 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 done < .gitattributes
 
 echo "✔ .distignore file created from .gitattributes and .gitignore."
+
+# Remove lines starting with "vendor" from .distignore
+sed -i.bak '/^vendor/d' .distignore
+rm -f .distignore.bak
+
+echo "✔︎ Lines starting with 'vendor' have been removed from .distignore."
