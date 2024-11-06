@@ -26,8 +26,8 @@ class Admin
     public static function enqueueAssets(): void
     {
         // phpcs:disable WordPress.WP.EnqueuedResourceParameters.MissingVersion -- the version is derived from the filemtime
-        wp_enqueue_style('thumbhash-placeholders-admin', self::assetUri('/admin/thumbhash-placeholders.css'), [], null);
-        wp_enqueue_script('thumbhash-placeholders-admin', self::assetUri('/admin/thumbhash-placeholders.js'), ['jquery'], null, true);
+        wp_enqueue_style('thumbhash-placeholders-admin', Plugin::getAssetURI('/admin/thumbhash-placeholders.css'), [], null);
+        wp_enqueue_script('thumbhash-placeholders-admin', Plugin::getAssetURI('/admin/thumbhash-placeholders.js'), ['jquery'], null, true);
         // phpcs:enable WordPress.WP.EnqueuedResourceParameters.MissingVersion
         wp_localize_script('thumbhash-placeholders-admin', 'wpThumbhash', [
             'ajax' => [
@@ -36,21 +36,6 @@ class Admin
                 'nonce' => wp_create_nonce(static::$ajaxAction),
             ],
         ]);
-    }
-
-    /**
-     * Helper function to get versioned asset urls
-     */
-    private static function assetUri(string $path): string
-    {
-        $uri = THUMBHASH_PLACEHOLDERS_PLUGIN_URI . '/' . ltrim($path, '/');
-        $file = THUMBHASH_PLACEHOLDERS_PLUGIN_DIR . '/' . ltrim($path, '/');
-
-        if (file_exists($file)) {
-            $version = filemtime($file);
-            $uri .= "?v=$version";
-        }
-        return $uri;
     }
 
     /**

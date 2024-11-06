@@ -81,4 +81,28 @@ class Plugin
             dataURI: esc_url($uri, ['data'])
         );
     }
+
+    /**
+     * Get the path to a plugin file
+     */
+    public static function getAssetPath(string $path): string
+    {
+        return THUMBHASH_PLACEHOLDERS_PLUGIN_DIR . '/' . ltrim($path, '/');
+    }
+
+    /**
+     * Helper function to get versioned asset urls
+     */
+    public static function getAssetURI(string $path): string
+    {
+        $uri = THUMBHASH_PLACEHOLDERS_PLUGIN_URI . '/' . ltrim($path, '/');
+        $file = static::getAssetPath($path);
+
+        if (file_exists($file)) {
+            $version = filemtime($file);
+            $uri .= "?v=$version";
+        }
+
+        return $uri;
+    }
 }

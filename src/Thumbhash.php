@@ -99,9 +99,28 @@ class ThumbHash
     private static function getDownsizedImage(WP_Image_Editor $editor, string $mimeType): string
     {
         $editor->resize(32, 32, false);
-        ob_start();
-        $editor->stream($mimeType);
-        return ob_get_clean();
+
+        // Save the image to a temporary location
+        $tempFile = wp_tempnam(); // Generates a temporary file path
+
+        if (is_wp_error($saved = $editor->save($tempFile, $mimeType))) {
+            throw new \RuntimeException('Failed to save resized image.');
+        }
+
+        $file = $saved['path'];
+
+        // Check if the file exists and is readable
+        if (!file_exists($file) || !is_readable($file)) {
+            throw new \RuntimeException('Temporary image file is not accessible.');
+        }
+
+        // Get the raw image data
+        $imageData = file_get_contents($file);
+
+        // Clean up the temporary file
+        wp_delete_file($tempFile);
+
+        return $imageData;
     }
 
     /**

@@ -13,41 +13,38 @@ use Yoast\WPTestUtils\WPIntegration\TestCase;
 final class PluginTest extends TestCase
 {
     /**
-     * Instance of the Post_Duplicator class.
-     *
-     * @var Post_Duplicator
-     */
-    private $instance;
-
-    /**
-     * Setting up the instance of Post_Duplicator.
-     *
-     * @return void
+     * Setting up
      */
     public function set_up()
     {
         parent::set_up();
-
-        // $this->instance = new Post_Duplicator();
     }
 
     /**
-     * Test whether the admin page is generated correctly.
+     * Test whether a placeholder is being created on upload
      *
      * @covers ::init
+     * @covers ::generateThumbhash
+     * @covers ::getPlaceholder
      */
-    public function test_init(): void
+    public function test_generate_placeholder_on_upload(): void
     {
         $this->assertNotFalse(
             has_action('add_attachment', [Plugin::class, 'generateThumbhash']),
             'Does not have expected generateThumbhash action'
         );
-        // dd(did_action('init'));
-        // $post = $this->factory->post->create_and_get();
-        // $this->assertInstanceOf('WP_Post', $post);
-        // dd($post);
-        // $id = $this->instance->create_duplicate( $post, [ 'copy_date' => true ] );
 
-        // $this->assertIsInt( $id );
+        $attachmentID = $this->factory()->attachment->create_upload_object(
+            Plugin::getAssetPath(FIXTURES_ORIGINAL_IMAGE)
+        );
+
+        $this->assertIsInt($attachmentID);
+
+        $placeholder = Plugin::getPlaceholder($attachmentID);
+
+        $this->assertInstanceOf(
+            'Hirasso\\WP\\ThumbhashPlaceholders\\Placeholder',
+            $placeholder
+        );
     }
 }
