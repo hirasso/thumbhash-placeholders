@@ -7,7 +7,7 @@ namespace Hirasso\WP\ThumbhashPlaceholders\Tests\Unit;
  *
  * @coversDefaultClass \Hirasso\WP\ThumbhashPlaceholder\ThumbHash
  */
-final class ThumbHashTest extends TestCase
+final class ThumbHashTest extends UnitTestCase
 {
     /**
      * @covers ::decode

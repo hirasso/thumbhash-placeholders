@@ -10,7 +10,7 @@ use Yoast\WPTestUtils\BrainMonkey\YoastTestCase;
 /**
  * TestCase base class.
  */
-abstract class TestCase extends YoastTestCase
+abstract class UnitTestCase extends YoastTestCase
 {
     /**
      * Mock various roles as WP_Role objects and stub the get_roles() function.

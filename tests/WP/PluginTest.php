@@ -3,14 +3,13 @@
 namespace Hirasso\WP\ThumbhashPlaceholders\Tests\WP;
 
 use Hirasso\WP\ThumbhashPlaceholders\Plugin;
-use Yoast\WPTestUtils\WPIntegration\TestCase;
 
 /**
  * Class Post_Duplicator.
  *
  * @coversDefaultClass \Hirasso\WP\ThumbhashPlaceholder\Plugin
  */
-final class PluginTest extends TestCase
+final class PluginTest extends WPTestCase
 {
     /**
      * Setting up
@@ -29,9 +28,9 @@ final class PluginTest extends TestCase
      */
     public function test_generate_placeholder_on_upload(): void
     {
-        $this->assertNotFalse(
-            has_action('add_attachment', [Plugin::class, 'generateThumbhash']),
-            'Does not have expected generateThumbhash action'
+        $this->assertHasAction(
+            'add_attachment',
+            [Plugin::class, 'generateThumbhash']
         );
 
         $attachmentID = $this->factory()->attachment->create_upload_object(
