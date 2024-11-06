@@ -2,6 +2,7 @@
 # https://git-scm.com/docs/gitattributes
 
 # Exclude unneccessary files from release
+.git export-ignore
 .editorconfig export-ignore
 .gitattributes export-ignore
 .distignore export-ignore
@@ -19,10 +20,11 @@ scoper.inc.php export-ignore
 TODO export-ignore
 php-scoper.phar export-ignore
 scoped export-ignore
-composer-actions export-ignore
+config export-ignore
 TODO export-ignore
 phpunit-wp.xml.dist export-ignore
 phpunit.xml.dist export-ignore
 tests export-ignore
 .wp-env.json export-ignore
 .nvmrc export-ignore
+readme.md export-ignore

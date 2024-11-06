@@ -47,9 +47,9 @@
       "composer dump-autoload --working-dir scoped --classmap-authoritative",
       "rm scoped/composer.json scoped/composer.lock",
       "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
-      "composer run-script scoped-package:postprocess"
+      "composer scoped-package:postprocess"
     ],
-    "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess",
+    "scoped-package:postprocess": "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess",
     "scoped-package:prepare": [
       "rm -rf vendor scoped",
       "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
@@ -84,9 +84,17 @@
       "rm -rf scoped",
       "wp i18n make-pot . languages/thumbhash-placeholders.pot"
     ],
-    "test:dist-archive": [
+    "test:dist-archive:old": [
       "wp package install wp-cli/dist-archive-command",
+      "rm -rf vendor",
+      "composer install --no-dev --prefer-dist",
+      "composer dump-autoload --classmap-authoritative",
       "config/scripts/generate-distignore.sh",
+      "wp dist-archive scoped $(basename \"$(pwd)\").zip"
+    ],
+    "test:dist-archive": [
+      "composer scoped-package:create",
+      "cd scoped",
       "wp dist-archive . $(basename \"$(pwd)\").zip"
     ]
   },

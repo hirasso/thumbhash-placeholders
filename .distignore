@@ -30,6 +30,7 @@ thumbhash-placeholders
 # Automatically generated from .gitattributes: 
 #----------
 
+.git
 .editorconfig
 .gitattributes
 .distignore
@@ -46,10 +47,11 @@ scoper.inc.php
 TODO
 php-scoper.phar
 scoped
-composer-actions
+config
 TODO
 phpunit-wp.xml.dist
 phpunit.xml.dist
 tests
 .wp-env.json
 .nvmrc
+readme.md
