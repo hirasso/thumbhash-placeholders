@@ -41,67 +41,64 @@
     "sort-packages": true
   },
   "scripts": {
-    "scoped-package:create": [
-      "composer run-script scoped-package:prepare",
+    "make-pot": [
+      "rm -rf scoped",
+      "wp i18n make-pot . languages/thumbhash-placeholders.pot"
+    ],
+    "plugin:check": [
+      "composer plugin:dist-archive",
+      "npx wp-env run cli wp plugin install plugin-check --activate",
+      "npx wp-env run cli wp plugin install plugin-check /wp-content/plugins/thumbhash-placeholders/thumbhash-placeholders.zip"
+    ],
+    "plugin:check:old": [
+      "composer scoped:create",
+      "zip -r scoped.zip scoped",
+      "wp plugin deactivate scoped || true",
+      "wp plugin uninstall scoped || true",
+      "wp plugin install scoped.zip --activate",
+      "wp plugin check scoped --slug=scoped"
+    ],
+    "plugin:dist-archive": [
+      "rm -rf $(basename \"$(pwd)\").zip",
+      "composer scoped:create",
+      "NAME=$(basename \"$(pwd)\"); wp dist-archive scoped $NAME.zip --plugin-dirname=$NAME"
+    ],
+    "scoped:create": [
+      "composer run-script scoped:prepare",
       "php php-scoper.phar add-prefix --force",
       "composer dump-autoload --working-dir scoped --classmap-authoritative",
       "rm scoped/composer.json scoped/composer.lock",
       "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
-      "composer scoped-package:postprocess"
+      "composer scoped:postprocess"
     ],
-    "scoped-package:postprocess": "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess",
-    "scoped-package:prepare": [
+    "scoped:postprocess": "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess",
+    "scoped:prepare": [
       "rm -rf vendor scoped",
       "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
       "chmod +x php-scoper.phar",
       "php php-scoper.phar --version",
       "composer install --no-dev --prefer-dist"
     ],
+    "test": [
+      "npx wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders composer test:wp && composer test:unit"
+    ],
     "test:unit": [
       "@php ./vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage"
+    ],
+    "test:watch": [
+      "ls tests/**/*.php | entr composer test"
     ],
     "test:wp": [
       "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
     ],
     "wp-env:start": [
       "npx wp-env start"
-    ],
-    "test": [
-      "npx wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders composer test:wp && composer test:unit"
-    ],
-    "test:watch": [
-      "ls tests/**/*.php | entr composer test"
-    ],
-    "plugin:check": [
-      "composer scoped-package:create",
-      "zip -r scoped.zip scoped",
-      "wp plugin deactivate scoped || true",
-      "wp plugin uninstall scoped || true",
-      "wp plugin install scoped.zip --activate",
-      "wp plugin check scoped"
-    ],
-    "make-pot": [
-      "rm -rf scoped",
-      "wp i18n make-pot . languages/thumbhash-placeholders.pot"
-    ],
-    "test:dist-archive:old": [
-      "wp package install wp-cli/dist-archive-command",
-      "rm -rf vendor",
-      "composer install --no-dev --prefer-dist",
-      "composer dump-autoload --classmap-authoritative",
-      "config/scripts/generate-distignore.sh",
-      "wp dist-archive scoped $(basename \"$(pwd)\").zip"
-    ],
-    "test:dist-archive": [
-      "composer scoped-package:create",
-      "cd scoped",
-      "wp dist-archive . $(basename \"$(pwd)\").zip"
     ]
   },
   "scripts-descriptions": {
-    "plugin:check": "check the plugin using plugin-check",
     "make-pot": "Update the pot file for translations",
-    "test:dist-archive": "Test what will be landing on the WP.org repository"
+    "plugin:check": "check the plugin using plugin-check",
+    "plugin:dist-archive": "Test what will be landing on the WP.org repository"
   },
   "post-install-cmd": "composer normalize"
 }

@@ -38,7 +38,7 @@ jobs:
 
       - name: Create scoped package
         run: |
-          composer scoped-package:create
+          composer scoped:create
 
       - name: Zip scoped package
         run: |
