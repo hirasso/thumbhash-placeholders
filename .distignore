@@ -25,6 +25,7 @@ thumbhash-placeholders
 
 # phpunit
 .phpunit.result.cache
+*.xml.dist.bak
 
 #----------
 # Automatically generated from .gitattributes: 
@@ -32,6 +33,7 @@ thumbhash-placeholders
 
 .editorconfig
 .gitattributes
+.distignore
 .github
 .gitignore
 .phpcsfixer.config.php
@@ -52,3 +54,4 @@ phpunit-wp.xml.dist
 phpunit.xml.dist
 tests
 .wp-env.json
+.nvmrc
