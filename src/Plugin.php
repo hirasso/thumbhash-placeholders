@@ -12,6 +12,7 @@ use Hirasso\WP\ThumbhashPlaceholders\WPCLI\Commands\ClearCommand;
 use Hirasso\WP\ThumbhashPlaceholders\WPCLI\WPCLIApplication;
 use Hirasso\WP\ThumbhashPlaceholders\WPCLI\Commands\GenerateCommand;
 use WP_Post;
+use WP_Error;
 
 class Plugin
 {
@@ -38,20 +39,43 @@ class Plugin
     }
 
     /**
-     * Generate a thumbhash on upload
+     * Generate and attach a thumbhash for an image
      */
     public static function generateThumbhash(
         int $attachmentID
-    ): bool {
+    ): bool|WP_Error {
         if (!wp_attachment_is_image($attachmentID)) {
-            return false;
+            return new WP_Error('not_an_image', sprintf(
+                /* translators: %s is a path to a file */
+                __('File is not an image: %d', 'thumbhash-placeholders'),
+                esc_html($attachmentID)
+            ));
         }
-        $thumbhash = Thumbhash::encode($attachmentID);
-        if ($thumbhash) {
-            update_post_meta($attachmentID, static::META_KEY, $thumbhash);
-            return true;
+
+        $mimeType = get_post_mime_type($attachmentID);
+        $file = get_attached_file($attachmentID);
+
+        /** @var ImageDownloader|null $downloader */
+        $downloader = null;
+        if (!file_exists($file)) {
+            $downloader = new ImageDownloader($mimeType);
+            $file = $downloader->download(wp_get_attachment_url($attachmentID));
         }
-        return false;
+
+        if (is_wp_error($file)) {
+            return $file;
+        }
+
+        $hash = Thumbhash::encode($file, $mimeType);
+
+        $downloader?->destroy();
+
+        if (is_wp_error($hash)) {
+            return $hash;
+        }
+
+        update_post_meta($attachmentID, static::META_KEY, $hash);
+        return true;
     }
 
     /**
