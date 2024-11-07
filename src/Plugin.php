@@ -17,7 +17,7 @@ use WP_Error;
 
 class Plugin
 {
-    public const META_KEY = '_thumbhash';
+    public const META_KEY = '_placeholder';
     public const TEXT_DOMAIN = 'placeholders';
 
     /**
@@ -32,7 +32,7 @@ class Plugin
         // Initialize WP CLI application
         if (defined('WP_CLI') && WP_CLI) {
             $cli = new WPCLIApplication(
-                'thumbhash',
+                'placeholders',
                 new ArrayCommandLoader([
                     GenerateCommand::class,
                     ClearCommand::class,
@@ -94,7 +94,7 @@ class Plugin
     }
 
     /**
-     * Get the thumbhash value for an attachment
+     * Get the placeholder value for an attachment
      */
     public static function getPlaceholder(int|WP_Post $post): ?Placeholder
     {

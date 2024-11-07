@@ -17,14 +17,13 @@ use Snicco\Component\BetterWPCLI\Synopsis\Synopsis;
 use WP_Query;
 
 /**
- * A WP CLI command to generate thumbhash placeholders
  * @see https://github.com/snicco/better-wp-cli
  */
 class GenerateCommand extends Command
 {
     protected static string $name = 'generate';
 
-    protected static string $short_description = 'Generate thumbhash placeholders';
+    protected static string $short_description = 'Generate placeholders';
 
     /**
      * Command synopsis.

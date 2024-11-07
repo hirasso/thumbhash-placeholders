@@ -1,6 +1,6 @@
 {
   "name": "hirasso/placeholders",
-  "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
+  "description": "A WordPress plugin to enhance your lazy-loaded images with blurry placeholders",
   "license": "GPL-3.0-or-later",
   "type": "wordpress-plugin",
   "authors": [
@@ -53,7 +53,7 @@
     "plugin:dist-archive": [
       "rm -rf $(basename \"$(pwd)\").zip",
       "composer scoped:create",
-      "NAME=$(basename \"$(pwd)\"); wp dist-archive build $NAME.zip --plugin-dirname=$NAME"
+      "NAME=$(basename \"$(pwd)\"); wp dist-archive $NAME $NAME.zip --plugin-dirname=$NAME"
     ],
     "scoped:create": [
       "composer scoped:preprocess",

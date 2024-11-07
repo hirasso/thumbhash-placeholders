@@ -29,7 +29,7 @@ wp plugin activate placeholders
 Access the placeholder in your templates:
 
 ```php
-$placeholder = get_thumbhash_placeholder($id);
+$placeholder = get_placeholder($id);
 ```
 
 The placeholder object looks like this:
@@ -48,8 +48,8 @@ object(Hirasso\WP\Placeholders\Placeholder)#2491 (1) {
 ```php
 <figure>
   <figure>
-    <?php if (function_exists('get_thumbhash_placeholder')): ?>
-      <img src="<?php echo get_thumbhash_placeholder($id)->dataURI ?>" aria-hidden="true" alt="">
+    <?php if (function_exists('get_placeholder')): ?>
+      <img src="<?php echo get_placeholder($id)?->dataURI ?>" aria-hidden="true" alt="">
     <?php endif; ?>
     <?php echo wp_get_attachment_image($id) ?>
   </figure>
@@ -75,18 +75,18 @@ figure img[aria-hidden="true"] {
 
 ## WP-CLI Commands
 
-### `thumbhash generate`
+### `placeholders generate`
 
 Generate placeholders for all or selected images. Pass `--force` to re-generate.
 
 ```
-wp thumbhash generate [<ids>...] [--force]
+wp placeholders generate [<ids>...] [--force]
 ```
 
-### `thumbhash clear`
+### `thumbhashs clear`
 
 Clear placeholders for all or selected images
 
 ```
-wp thumbhash clear [<ids>...]
+wp placeholders clear [<ids>...]
 ```

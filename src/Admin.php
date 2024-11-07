@@ -12,7 +12,7 @@ use WP_Post;
 class Admin
 {
     public static $assetHandle = 'placeholders';
-    public static $ajaxAction = 'generate_thumbhash';
+    public static $ajaxAction = 'generate_placeholder';
 
     public static function init()
     {

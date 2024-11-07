@@ -15,14 +15,13 @@ use Snicco\Component\BetterWPCLI\Synopsis\Synopsis;
 use WP_Query;
 
 /**
- * A WP CLI command to generate thumbhash placeholders
  * @see https://github.com/snicco/better-wp-cli
  */
 class ClearCommand extends Command
 {
     protected static string $name = 'clear';
 
-    protected static string $short_description = 'Clear thumbhash placeholders';
+    protected static string $short_description = 'Clear placeholders';
 
     /**
      * Command synopsis.

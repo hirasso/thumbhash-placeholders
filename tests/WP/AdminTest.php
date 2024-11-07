@@ -37,7 +37,7 @@ final class AdminTest extends WPTestCase
         );
 
         $this->assertHasAction(
-            'wp_ajax_generate_thumbhash',
+            'wp_ajax_generate_placeholder',
             [Admin::class, 'wpAjaxGenerateThumbhash'],
         );
     }
