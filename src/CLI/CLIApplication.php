@@ -1,11 +1,11 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\WPCLI;
+namespace Hirasso\WP\ThumbhashPlaceholders\CLI;
 
 use Snicco\Component\BetterWPCLI\WPCLIApplication as SniccoWPCLIApplication;
 use Snicco\Component\BetterWPCLI\CommandLoader\ArrayCommandLoader;
 
-class WPCLIApplication
+class CLIApplication
 {
     public function __construct(
         private string $namespace,
