@@ -48,8 +48,7 @@
     "plugin:check": [
       "composer scoped:create",
       "npx wp-env run cli wp plugin install plugin-check --activate",
-      "npx wp-env run cli mv wp-content/plugins/thumbhash-placeholders/thumbhash-placeholders thumbhash-placeholders",
-      "npx wp-env run cli wp plugin check ./thumbhash-placeholders --slug=thumbhash-placeholders"
+      "SLUG=$(basename \"$(pwd)\"); npx wp-env run cli wp plugin check wp-content/plugins/$SLUG/$SLUG --slug=$SLUG"
     ],
     "plugin:dist-archive": [
       "rm -rf $(basename \"$(pwd)\").zip",
