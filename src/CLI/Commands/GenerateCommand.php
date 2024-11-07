@@ -53,7 +53,10 @@ class GenerateCommand extends Command
         $ids = $input->getRepeatingArgument('ids', []);
         $force = $input->getFlag('force');
 
-        $io->title("Generating Placeholders");
+        $io->title(match ($force) {
+            true => "Generating Placeholders (force: true)",
+            default => "Generating Placeholders"
+        });
 
         $validator = new InputValidator($io);
         if (!$validator->isNumericArray($ids, "Non-numeric ids provided")) {
