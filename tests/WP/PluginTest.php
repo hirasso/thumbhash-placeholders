@@ -45,6 +45,9 @@ final class PluginTest extends WPTestCase
             'Hirasso\\WP\\Placeholders\\Placeholder',
             $placeholder
         );
+
+        $this->assertEquals(FIXTURES_EXPECTED_HASH, $placeholder->hash);
+        $this->assertEquals(FIXTURES_EXPECTED_DATA_URI, $placeholder->dataURI);
     }
 
     /**
