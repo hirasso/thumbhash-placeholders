@@ -46,17 +46,11 @@
       "wp i18n make-pot . languages/thumbhash-placeholders.pot"
     ],
     "plugin:check": [
-      "composer plugin:dist-archive",
-      "npx wp-env run cli wp plugin install plugin-check --activate",
-      "npx wp-env run cli wp plugin install plugin-check /wp-content/plugins/thumbhash-placeholders/thumbhash-placeholders.zip"
-    ],
-    "plugin:check:old": [
       "composer scoped:create",
-      "zip -r scoped.zip scoped",
-      "wp plugin deactivate scoped || true",
-      "wp plugin uninstall scoped || true",
-      "wp plugin install scoped.zip --activate",
-      "wp plugin check scoped --slug=scoped"
+      "rm -rf $(basename \"$(pwd)\")",
+      "mv scoped $(basename \"$(pwd)\")",
+      "npx wp-env run cli wp plugin install plugin-check --activate",
+      "npx wp-env run cli wp plugin check wp-content/plugins/thumbhash-placeholders/thumbhash-placeholders"
     ],
     "plugin:dist-archive": [
       "rm -rf $(basename \"$(pwd)\").zip",
