@@ -9,8 +9,9 @@ declare(strict_types=1);
 namespace Hirasso\WP\ThumbhashPlaceholders;
 
 use Hirasso\WP\ThumbhashPlaceholders\CLI\Commands\ClearCommand;
-use Hirasso\WP\ThumbhashPlaceholders\CLI\CLIApplication;
 use Hirasso\WP\ThumbhashPlaceholders\CLI\Commands\GenerateCommand;
+use Snicco\Component\BetterWPCLI\CommandLoader\ArrayCommandLoader;
+use Snicco\Component\BetterWPCLI\WPCLIApplication;
 use WP_Post;
 use WP_Error;
 
@@ -28,13 +29,17 @@ class Plugin
         add_action('add_attachment', [self::class, 'generateThumbhash']);
         add_action('plugins_loaded', [self::class, 'loadTextDomain']);
 
-        new CLIApplication(
-            'thumbhash',
-            [
-                GenerateCommand::class,
-                ClearCommand::class,
-            ]
-        );
+        // Initialize WP CLI application
+        if (defined('WP_CLI') && WP_CLI) {
+            $cli = new WPCLIApplication(
+                'thumbhash',
+                new ArrayCommandLoader([
+                    GenerateCommand::class,
+                    ClearCommand::class,
+                ])
+            );
+            $cli->registerCommands();
+        }
 
         Admin::init();
     }
