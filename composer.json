@@ -42,33 +42,31 @@
   },
   "scripts": {
     "make-pot": [
-      "rm -rf scoped",
+      "rm -rf build",
       "wp i18n make-pot . languages/thumbhash-placeholders.pot"
     ],
     "plugin:check": [
-      "composer scoped:create",
+      "composer run-script scoped:create",
       "rm -rf $(basename \"$(pwd)\")",
-      "mv scoped $(basename \"$(pwd)\")",
+      "mv build $(basename \"$(pwd)\")",
       "npx wp-env run cli wp plugin install plugin-check --activate",
       "npx wp-env run cli wp plugin check wp-content/plugins/thumbhash-placeholders/thumbhash-placeholders"
     ],
     "plugin:dist-archive": [
       "rm -rf $(basename \"$(pwd)\").zip",
       "composer scoped:create",
-      "NAME=$(basename \"$(pwd)\"); wp dist-archive scoped $NAME.zip --plugin-dirname=$NAME"
+      "NAME=$(basename \"$(pwd)\"); wp dist-archive build $NAME.zip --plugin-dirname=$NAME"
     ],
     "scoped:create": [
-      "composer run-script scoped:prepare",
+      "composer scoped:preprocess",
       "php php-scoper.phar add-prefix --force",
-      "composer dump-autoload --working-dir scoped --classmap-authoritative",
-      "rm scoped/composer.json scoped/composer.lock",
-      "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
+      "composer dump-autoload --working-dir build --classmap-authoritative",
       "composer scoped:postprocess"
     ],
     "scoped:postprocess": "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess",
-    "scoped:prepare": [
-      "rm -rf vendor scoped",
-      "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
+    "scoped:preprocess": [
+      "rm -rf vendor build $(basename \"$(pwd)\")",
+      "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar",
       "chmod +x php-scoper.phar",
       "php php-scoper.phar --version",
       "composer install --no-dev --prefer-dist"
