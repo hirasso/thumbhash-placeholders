@@ -1,6 +1,6 @@
 
 #----------
-# Automatically generated from .gitignore: 
+# Automatically generated from .gitignore:
 #----------
 
 # System
@@ -17,7 +17,7 @@ node_modules
 # php-scoper
 php-scoper.phar
 scoped
-thumbhash-placeholders
+placeholders
 
 # zip files
 *.zip
@@ -27,7 +27,7 @@ thumbhash-placeholders
 *.xml.dist.bak
 
 #----------
-# Automatically generated from .gitattributes: 
+# Automatically generated from .gitattributes:
 #----------
 
 .git

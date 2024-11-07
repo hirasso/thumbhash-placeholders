@@ -1,9 +1,9 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
 use Exception;
-use Hirasso\WP\ThumbhashPlaceholders\Enums\ImageDriver;
+use Hirasso\WP\Placeholders\Enums\ImageDriver;
 use RuntimeException;
 use WP_Image_Editor;
 use WP_Error;

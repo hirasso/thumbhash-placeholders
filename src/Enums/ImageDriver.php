@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\Enums;
+namespace Hirasso\WP\Placeholders\Enums;
 
 enum ImageDriver: string
 {

@@ -22,10 +22,10 @@ use Isolated\Symfony\Component\Finder\Finder;
 // );
 $excludedFiles = [];
 $copyFiles = [
-    'thumbhash-placeholders.php',
+    'placeholders.php',
     'readme.txt',
-    'admin/thumbhash-placeholders.js',
-    'admin/thumbhash-placeholders.css',
+    'admin/placeholders.js',
+    'admin/placeholders.css',
     'composer.json',
     'composer.lock',
 ];
@@ -118,7 +118,7 @@ return [
     //
     // For more information see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#excluded-symbols
     'exclude-namespaces' => [
-        'Hirasso\\WP\\ThumbhashPlaceholders', // The Acme\Foo namespace (and sub-namespaces),
+        'Hirasso\\WP\\Placeholders', // The Acme\Foo namespace (and sub-namespaces),
         // '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
         // '~^$~',                        // The root namespace only
         // '',                            // Any namespace
@@ -140,7 +140,7 @@ return [
     'expose-global-classes' => true,
     'expose-global-functions' => true,
     'expose-namespaces' => [
-        'Hirasso\\WP\\ThumbhashPlaceholders', // The Acme\Foo namespace (and sub-namespaces)
+        'Hirasso\\WP\\Placeholders', // The Acme\Foo namespace (and sub-namespaces)
         // '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
         // '~^$~',                        // The root namespace only
         // '',                            // Any namespace

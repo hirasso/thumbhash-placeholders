@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\CLI;
+namespace Hirasso\WP\Placeholders\CLI;
 
 use Snicco\Component\BetterWPCLI\Style\SniccoStyle;
 

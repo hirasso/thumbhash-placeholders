@@ -14,7 +14,7 @@ vendor
 php-scoper.phar
 scoped
 build
-thumbhash-placeholders
+placeholders
 
 # zip files
 *.zip

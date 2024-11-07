@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\Tests\WP;
+namespace Hirasso\WP\Placeholders\Tests\WP;
 
 use Yoast\WPTestUtils\WPIntegration\TestCase;
 

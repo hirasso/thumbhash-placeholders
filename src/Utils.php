@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
 use WP_Filesystem_Base;
 use WP_Filesystem_Direct;

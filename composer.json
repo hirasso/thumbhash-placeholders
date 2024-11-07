@@ -1,5 +1,5 @@
 {
-  "name": "hirasso/thumbhash-placeholders",
+  "name": "hirasso/placeholders",
   "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
   "license": "GPL-3.0-or-later",
   "type": "wordpress-plugin",
@@ -23,13 +23,13 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "Hirasso\\WP\\ThumbhashPlaceholders\\": "src/"
+      "Hirasso\\WP\\Placeholders\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
       "Hirasso\\WP\\ComposerActions\\": "config/composer",
-      "Hirasso\\WP\\ThumbhashPlaceholders\\Tests\\": "tests/"
+      "Hirasso\\WP\\Placeholders\\Tests\\": "tests/"
     }
   },
   "config": {
@@ -43,7 +43,7 @@
   "scripts": {
     "make-pot": [
       "rm -rf build",
-      "wp i18n make-pot . languages/thumbhash-placeholders.pot"
+      "wp i18n make-pot . languages/placeholders.pot"
     ],
     "plugin:check": [
       "composer scoped:create",
@@ -73,7 +73,7 @@
       "composer install --no-dev --prefer-dist"
     ],
     "test": [
-      "npx wp-env run tests-cli --env-cwd=wp-content/plugins/thumbhash-placeholders composer test:wp && composer test:unit"
+      "npx wp-env run tests-cli --env-cwd=wp-content/plugins/placeholders composer test:wp && composer test:unit"
     ],
     "test:unit": [
       "@php ./vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage"

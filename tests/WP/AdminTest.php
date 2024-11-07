@@ -1,8 +1,8 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\Tests\WP;
+namespace Hirasso\WP\Placeholders\Tests\WP;
 
-use Hirasso\WP\ThumbhashPlaceholders\Admin;
+use Hirasso\WP\Placeholders\Admin;
 
 /**
  * Class Post_Duplicator.

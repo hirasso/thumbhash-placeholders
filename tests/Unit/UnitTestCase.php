@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\Tests\Unit;
+namespace Hirasso\WP\Placeholders\Tests\Unit;
 
 use Brain\Monkey\Functions;
 use Mockery;

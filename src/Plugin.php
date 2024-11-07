@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\WP\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
-use Hirasso\WP\ThumbhashPlaceholders\CLI\Commands\ClearCommand;
-use Hirasso\WP\ThumbhashPlaceholders\CLI\Commands\GenerateCommand;
+use Hirasso\WP\Placeholders\CLI\Commands\ClearCommand;
+use Hirasso\WP\Placeholders\CLI\Commands\GenerateCommand;
 use Snicco\Component\BetterWPCLI\CommandLoader\ArrayCommandLoader;
 use Snicco\Component\BetterWPCLI\WPCLIApplication;
 use WP_Post;
@@ -18,7 +18,7 @@ use WP_Error;
 class Plugin
 {
     public const META_KEY = '_thumbhash';
-    public const TEXT_DOMAIN = 'thumbhash-placeholders';
+    public const TEXT_DOMAIN = 'placeholders';
 
     /**
      * Initialize the plugin
@@ -50,7 +50,7 @@ class Plugin
     public static function loadTextDomain(): void
     {
         // phpcs:ignore WordPress.WP.DeprecatedParameters.Load_plugin_textdomainParam2Found -- plugin-check fails here
-        load_plugin_textdomain('thumbhash-placeholders', '', static::getAssetPath('/languages'));
+        load_plugin_textdomain('placeholders', '', static::getAssetPath('/languages'));
     }
 
     /**
@@ -62,7 +62,7 @@ class Plugin
         if (!wp_attachment_is_image($attachmentID)) {
             return new WP_Error('not_an_image', sprintf(
                 /* translators: %s is a path to a file */
-                __('File is not an image: %d', 'thumbhash-placeholders'),
+                __('File is not an image: %d', 'placeholders'),
                 esc_html($attachmentID)
             ));
         }
@@ -126,7 +126,7 @@ class Plugin
      */
     public static function getAssetPath(string $path): string
     {
-        return THUMBHASH_PLACEHOLDERS_PLUGIN_DIR . '/' . ltrim($path, '/');
+        return PLACEHOLDERS_PLUGIN_DIR . '/' . ltrim($path, '/');
     }
 
     /**
@@ -134,7 +134,7 @@ class Plugin
      */
     public static function getAssetURI(string $path): string
     {
-        $uri = THUMBHASH_PLACEHOLDERS_PLUGIN_URI . '/' . ltrim($path, '/');
+        $uri = PLACEHOLDERS_PLUGIN_URI . '/' . ltrim($path, '/');
         $file = static::getAssetPath($path);
 
         if (file_exists($file)) {

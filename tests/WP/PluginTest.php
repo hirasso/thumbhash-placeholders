@@ -1,8 +1,8 @@
 <?php
 
-namespace Hirasso\WP\ThumbhashPlaceholders\Tests\WP;
+namespace Hirasso\WP\Placeholders\Tests\WP;
 
-use Hirasso\WP\ThumbhashPlaceholders\Plugin;
+use Hirasso\WP\Placeholders\Plugin;
 
 /**
  * Class Post_Duplicator.
@@ -42,7 +42,7 @@ final class PluginTest extends WPTestCase
         $placeholder = Plugin::getPlaceholder($attachmentID);
 
         $this->assertInstanceOf(
-            'Hirasso\\WP\\ThumbhashPlaceholders\\Placeholder',
+            'Hirasso\\WP\\Placeholders\\Placeholder',
             $placeholder
         );
     }

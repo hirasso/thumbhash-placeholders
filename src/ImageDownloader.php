@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\WP\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
 use RuntimeException;
 
@@ -20,7 +20,7 @@ class ImageDownloader
     private static function getDir(): string
     {
         $uploadDir = wp_upload_dir();
-        $dir = $uploadDir['basedir'] . '/' . 'thumbhash-placeholders';
+        $dir = $uploadDir['basedir'] . '/' . 'placeholders';
         if (!file_exists($dir)) {
             wp_mkdir_p($dir);
         }

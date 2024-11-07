@@ -2,7 +2,7 @@
 
 **A WordPress plugin to generate image placeholders for smoother lazyloading 🎨**
 
-![Tests](https://github.com/hirasso/thumbhash-placeholders/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/hirasso/placeholders/actions/workflows/tests.yml/badge.svg)
 
 ## How it works
 
@@ -13,13 +13,13 @@ This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automaticall
 1. Install the plugin:
 
 ```shell
-composer require hirasso/thumbhash-placeholders
+composer require hirasso/placeholders
 ```
 
 1. Activate the plugin manually or using WP CLI:
 
 ```shell
-wp plugin activate thumbhash-placeholders
+wp plugin activate placeholders
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ $placeholder = get_thumbhash_placeholder($id);
 The placeholder object looks like this:
 
 ```
-object(Hirasso\WP\ThumbhashPlaceholders\Placeholder)#2491 (1) {
+object(Hirasso\WP\Placeholders\Placeholder)#2491 (1) {
   ["dataURI"]=>
   string(4218) "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAXCAYAAABqBU3hAAAMEElEQVR4AQCBAH7..."
   ["hash"]=>

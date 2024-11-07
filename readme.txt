@@ -15,7 +15,7 @@ Generate image placeholders for smoother lazyloading 🎨
 
 Install like any other WordPress plugin :)
 
-The **documentation** can be found on [GitHub](https://github.com/hirasso/thumbhash-placeholders)
+The **documentation** can be found on [GitHub](https://github.com/hirasso/placeholders)
 
 == Changelog ==
 

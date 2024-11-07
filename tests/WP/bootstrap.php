@@ -4,7 +4,7 @@
  * PHPUnit WP integration test bootstrap file
  */
 
-namespace Hirasso\WP\ThumbhashPlaceholders\Tests\WP;
+namespace Hirasso\WP\Placeholders\Tests\WP;
 
 use Yoast\WPTestUtils\WPIntegration;
 
@@ -29,7 +29,7 @@ require_once WPIntegration\get_path_to_wp_test_dir() . 'includes/functions.php';
 \tests_add_filter(
     'muplugins_loaded',
     static function () {
-        require_once \dirname(__DIR__, 2) . '/thumbhash-placeholders.php';
+        require_once \dirname(__DIR__, 2) . '/placeholders.php';
     }
 );
 

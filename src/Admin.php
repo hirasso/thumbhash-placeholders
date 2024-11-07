@@ -4,14 +4,14 @@
  * https://rassohilber.com
  */
 
-namespace Hirasso\WP\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
-use Hirasso\WP\ThumbhashPlaceholders\Enums\AdminContext;
+use Hirasso\WP\Placeholders\Enums\AdminContext;
 use WP_Post;
 
 class Admin
 {
-    public static $assetHandle = 'thumbhash-placeholders';
+    public static $assetHandle = 'placeholders';
     public static $ajaxAction = 'generate_thumbhash';
 
     public static function init()
@@ -27,8 +27,8 @@ class Admin
     public static function enqueueAssets(): void
     {
         // phpcs:disable WordPress.WP.EnqueuedResourceParameters.MissingVersion -- the version is derived from the filemtime
-        wp_enqueue_style(static::$assetHandle, Plugin::getAssetURI('/admin/thumbhash-placeholders.css'), [], null);
-        wp_enqueue_script(static::$assetHandle, Plugin::getAssetURI('/admin/thumbhash-placeholders.js'), ['jquery'], null, true);
+        wp_enqueue_style(static::$assetHandle, Plugin::getAssetURI('/admin/placeholders.css'), [], null);
+        wp_enqueue_script(static::$assetHandle, Plugin::getAssetURI('/admin/placeholders.js'), ['jquery'], null, true);
         // phpcs:enable WordPress.WP.EnqueuedResourceParameters.MissingVersion
         wp_localize_script(static::$assetHandle, 'wpThumbhash', [
             'ajax' => [
@@ -51,8 +51,8 @@ class Admin
             return $fields;
         }
 
-        $fields['thumbhash-placeholders-field'] = [
-            'label' => __('Placeholder', 'thumbhash-placeholders'),
+        $fields['placeholders-field'] = [
+            'label' => __('Placeholder', 'placeholders'),
             'input'  => 'html',
             'html' => static::renderAttachmentField($attachment->ID, AdminContext::INITIAL),
         ];
@@ -66,30 +66,30 @@ class Admin
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
         $thumbhashURL = Plugin::getPlaceholder($id)?->dataURI ?: '';
-        $buttonLabel = $thumbhashURL ? __('Regenerate', 'thumbhash-placeholders') : __('Generate', 'thumbhash-placeholders');
+        $buttonLabel = $thumbhashURL ? __('Regenerate', 'placeholders') : __('Generate', 'placeholders');
 
         ob_start() ?>
 
-        <thumbhash-placeholders-field data-id="<?= esc_attr($id) ?>">
+        <placeholders-field data-id="<?= esc_attr($id) ?>">
             <?php if ($thumbhashURL): ?>
                 <img
-                    class="thumbhash-placeholders_image"
+                    class="placeholders_image"
                     src="<?php echo esc_attr($thumbhashURL) ?>"
-                    alt="<?php esc_attr_e('Thumbhash placeholder', 'thumbhash-placeholders') ?>">
+                    alt="<?php esc_attr_e('Thumbhash placeholder', 'placeholders') ?>">
             <?php endif; ?>
 
             <button
-                data-thumbhash-placeholders-generate
+                data-placeholders-generate
                 type="button"
                 class="button button-small">
                 <?php echo esc_html($buttonLabel) ?>
             </button>
 
             <?php if ($context === AdminContext::REGENERATE): ?>
-                <i aria-hidden="true" data-thumbhash-placeholders-regenerated></i>
+                <i aria-hidden="true" data-placeholders-regenerated></i>
             <?php endif; ?>
 
-        </thumbhash-placeholders-field>
+        </placeholders-field>
 
 <?php return ob_get_clean();
     }
