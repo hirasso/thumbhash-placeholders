@@ -1,54 +1,98 @@
 {
-    "name": "hirasso/thumbhash-placeholders",
-    "description": "A WordPress plugin to enhance your lazy-loaded images with thumbhash placeholders",
-    "type": "wordpress-plugin",
-    "license": "GPL-3.0-or-later",
-    "autoload": {
-        "psr-4": {
-            "Hirasso\\ThumbhashPlaceholders\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Hirasso\\ComposerActions\\": "actions/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Rasso Hilber",
-            "email": "mail@rassohilber.com"
-        }
-    ],
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "require": {
-        "snicco/better-wp-cli": "^1.2",
-        "sniccowp/php-scoper-wordpress-excludes": "dev-master",
-        "srwiez/thumbhash": "dev-master"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "dev-master"
-    },
-    "scripts": {
-        "scoped-package:prepare": [
-            "rm -rf vendor scoped",
-            "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar && echo '✅ Downloaded php-scoper.phar'",
-            "chmod +x php-scoper.phar",
-            "php php-scoper.phar --version",
-            "composer install --no-dev --prefer-dist"
-        ],
-        "scoped-package:create": [
-            "composer run-script scoped-package:prepare",
-            "php php-scoper.phar add-prefix --force",
-            "composer dump-autoload --working-dir scoped --classmap-authoritative",
-            "rm scoped/composer.json scoped/composer.lock",
-            "rm -rf scoped/vendor/sniccowp/php-scoper-wordpress-excludes",
-            "composer run-script scoped-package:postprocess"
-        ],
-        "scoped-package:postprocess": "Hirasso\\ComposerActions\\ScopedPackage::postProcess"
+  "name": "hirasso/placeholders",
+  "description": "A WordPress plugin to enhance your lazy-loaded images with blurry placeholders",
+  "license": "GPL-3.0-or-later",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Rasso Hilber",
+      "email": "mail@rassohilber.com"
     }
+  ],
+  "require": {
+    "snicco/better-wp-cli": "^1.2",
+    "sniccowp/php-scoper-wordpress-excludes": "dev-master",
+    "srwiez/thumbhash": "dev-master"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "dev-main",
+    "friendsofphp/php-cs-fixer": "dev-master",
+    "snicco/better-wp-cli-testing": "dev-master",
+    "symfony/var-dumper": "7.2.x-dev",
+    "yoast/wp-test-utils": "^1.0@dev"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Hirasso\\WP\\Placeholders\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Hirasso\\WP\\ComposerActions\\": "config/composer",
+      "Hirasso\\WP\\Placeholders\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    },
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "scripts": {
+    "make-pot": [
+      "rm -rf build",
+      "wp i18n make-pot . languages/placeholders.pot"
+    ],
+    "plugin:check": [
+      "composer scoped:create",
+      "npx wp-env run cli wp plugin install plugin-check --activate",
+      "SLUG=$(basename \"$(pwd)\"); npx wp-env run cli wp plugin check wp-content/plugins/$SLUG/$SLUG --slug=$SLUG"
+    ],
+    "plugin:dist-archive": [
+      "rm -rf $(basename \"$(pwd)\").zip",
+      "composer scoped:create",
+      "NAME=$(basename \"$(pwd)\"); wp dist-archive $NAME $NAME.zip --plugin-dirname=$NAME"
+    ],
+    "scoped:create": [
+      "composer scoped:preprocess",
+      "php php-scoper.phar add-prefix --force",
+      "composer dump-autoload --working-dir build --classmap-authoritative",
+      "composer install",
+      "composer scoped:postprocess"
+    ],
+    "scoped:postprocess": [
+      "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess"
+    ],
+    "scoped:preprocess": [
+      "rm -rf vendor build $(basename \"$(pwd)\")",
+      "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar",
+      "chmod +x php-scoper.phar",
+      "php php-scoper.phar --version",
+      "composer install --no-dev --prefer-dist"
+    ],
+    "test": [
+      "npx wp-env run tests-cli --env-cwd=wp-content/plugins/placeholders composer test:wp && composer test:unit"
+    ],
+    "test:unit": [
+      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage"
+    ],
+    "test:watch": [
+      "ls tests/**/*.php | entr composer test"
+    ],
+    "test:wp": [
+      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
+    ],
+    "wp-env:start": [
+      "npx wp-env start"
+    ]
+  },
+  "scripts-descriptions": {
+    "make-pot": "Update the pot file for translations",
+    "plugin:check": "check the plugin using plugin-check",
+    "plugin:dist-archive": "Test what will be landing on the WP.org repository"
+  },
+  "post-install-cmd": "composer normalize"
 }

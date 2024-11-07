@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\ThumbhashPlaceholders\WPCLI;
+namespace Hirasso\WP\Placeholders\CLI;
 
 class Utils
 {

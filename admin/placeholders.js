@@ -19,14 +19,14 @@
     return /** @type {HTMLElement} */ (template.content.children[0]);
   }
 
-  class ThumbhashPlaceholdersField extends HTMLElement {
+  class PlaceholdersField extends HTMLElement {
     /** @type {number} attachmentID */
     attachmendID;
 
     constructor() {
       super();
       const button = /** @type {!HTMLButtonElement} */ (
-        this.querySelector("[data-thumbhash-placeholders-generate]")
+        this.querySelector("[data-placeholders-generate]")
       );
       this.attachmendID = parseInt(String(this.getAttribute("data-id")), 10);
       button.addEventListener("click", this.generate);
@@ -55,8 +55,5 @@
     };
   }
 
-  customElements.define(
-    "thumbhash-placeholders-field",
-    ThumbhashPlaceholdersField,
-  );
+  customElements.define("placeholders-field", PlaceholdersField);
 })(/** @type {jQuery} */ jQuery);

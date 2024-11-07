@@ -13,7 +13,12 @@ vendor
 # php-scoper
 php-scoper.phar
 scoped
-thumbhash-placeholders
+build
+placeholders
 
 # zip files
 *.zip
+
+# phpunit
+.phpunit.result.cache
+*.xml.dist.bak

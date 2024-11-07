@@ -1,6 +1,6 @@
 <?php
 
-namespace Hirasso\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
 /**
  * The normalized Placeholder object, for use in the frontend

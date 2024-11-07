@@ -2,6 +2,8 @@
 
 **A WordPress plugin to generate image placeholders for smoother lazyloading 🎨**
 
+![Tests](https://github.com/hirasso/placeholders/actions/workflows/tests.yml/badge.svg)
+
 ## How it works
 
 This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automatically generate a small blurry placeholder image for each image during upload. That image placeholder can be rendered as a data URI string to display while the high-quality image is loading.
@@ -11,13 +13,13 @@ This plugin uses [ThumbHash](https://evanw.github.io/thumbhash/) to automaticall
 1. Install the plugin:
 
 ```shell
-composer require hirasso/thumbhash-placeholders
+composer require hirasso/placeholders
 ```
 
 1. Activate the plugin manually or using WP CLI:
 
 ```shell
-wp plugin activate thumbhash-placeholders
+wp plugin activate placeholders
 ```
 
 ## Usage
@@ -27,13 +29,13 @@ wp plugin activate thumbhash-placeholders
 Access the placeholder in your templates:
 
 ```php
-$placeholder = get_thumbhash_placeholder($id);
+$placeholder = get_placeholder($id);
 ```
 
 The placeholder object looks like this:
 
 ```
-object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
+object(Hirasso\WP\Placeholders\Placeholder)#2491 (1) {
   ["dataURI"]=>
   string(4218) "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAXCAYAAABqBU3hAAAMEElEQVR4AQCBAH7..."
   ["hash"]=>
@@ -46,8 +48,8 @@ object(Hirasso\ThumbhashPlaceholders\Placeholder)#2491 (1) {
 ```php
 <figure>
   <figure>
-    <?php if (function_exists('get_thumbhash_placeholder')): ?>
-      <img src="<?php echo get_thumbhash_placeholder($id)->dataURI ?>" aria-hidden="true" alt="">
+    <?php if (function_exists('get_placeholder')): ?>
+      <img src="<?php echo get_placeholder($id)?->dataURI ?>" aria-hidden="true" alt="">
     <?php endif; ?>
     <?php echo wp_get_attachment_image($id) ?>
   </figure>
@@ -73,18 +75,18 @@ figure img[aria-hidden="true"] {
 
 ## WP-CLI Commands
 
-### `thumbhash generate`
+### `placeholders generate`
 
 Generate placeholders for all or selected images. Pass `--force` to re-generate.
 
 ```
-wp thumbhash generate [<ids>...] [--force]
+wp placeholders generate [<ids>...] [--force]
 ```
 
-### `thumbhash clear`
+### `thumbhashs clear`
 
 Clear placeholders for all or selected images
 
 ```
-wp thumbhash clear [<ids>...]
+wp placeholders clear [<ids>...]
 ```

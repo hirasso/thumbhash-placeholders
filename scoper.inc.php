@@ -22,10 +22,10 @@ use Isolated\Symfony\Component\Finder\Finder;
 // );
 $excludedFiles = [];
 $copyFiles = [
-    'thumbhash-placeholders.php',
+    'placeholders.php',
     'readme.txt',
-    'admin/thumbhash-placeholders.js',
-    'admin/thumbhash-placeholders.css',
+    'admin/placeholders.js',
+    'admin/placeholders.css',
     'composer.json',
     'composer.lock',
 ];
@@ -56,7 +56,7 @@ return [
 
     // The base output directory for the prefixed files.
     // This will be overridden by the 'output-dir' command line option if present.
-    'output-dir' => 'scoped',
+    // 'output-dir' => 'scoped',
 
     // By default when running php-scoper add-prefix, it will prefix all relevant code found in the current working
     // directory. You can however define which files should be scoped by defining a collection of Finders in the
@@ -118,7 +118,7 @@ return [
     //
     // For more information see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#excluded-symbols
     'exclude-namespaces' => [
-        'Hirasso',                     // The Acme\Foo namespace (and sub-namespaces),
+        'Hirasso\\WP\\Placeholders', // The Acme\Foo namespace (and sub-namespaces),
         // '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
         // '~^$~',                        // The root namespace only
         // '',                            // Any namespace
@@ -140,7 +140,7 @@ return [
     'expose-global-classes' => true,
     'expose-global-functions' => true,
     'expose-namespaces' => [
-        'Hirasso',                     // The Acme\Foo namespace (and sub-namespaces)
+        'Hirasso\\WP\\Placeholders', // The Acme\Foo namespace (and sub-namespaces)
         // '~^PHPUnit\\\\Framework$~',    // The whole namespace PHPUnit\Framework (but not sub-namespaces)
         // '~^$~',                        // The root namespace only
         // '',                            // Any namespace

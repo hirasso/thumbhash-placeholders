@@ -1,9 +1,9 @@
-thumbhash-placeholders-field {
+placeholders-field {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-thumbhash-placeholders-field img {
+placeholders-field img {
   display: block;
   height: 26px;
   width: auto;
@@ -15,7 +15,7 @@ thumbhash-placeholders-field img {
     opacity: 0;
   }
 }
-[data-thumbhash-placeholders-regenerated] {
+[data-placeholders-regenerated] {
   background: hsl(168, 100%, 50%);
   --size: 1.3rem;
   display: block;
@@ -31,6 +31,6 @@ thumbhash-placeholders-field img {
   animation: disappear 0.5s 1s linear;
   animation-fill-mode: forwards;
 }
-[data-thumbhash-placeholders-regenerated]::before {
+[data-placeholders-regenerated]::before {
   content: "✔︎";
 }

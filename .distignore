@@ -1,0 +1,57 @@
+
+#----------
+# Automatically generated from .gitignore:
+#----------
+
+# System
+.DS_Store
+
+# NPM
+node_modules
+
+# Composer
+
+# php-cs-fixer
+.php-cs-fixer.cache
+
+# php-scoper
+php-scoper.phar
+scoped
+placeholders
+
+# zip files
+*.zip
+
+# phpunit
+.phpunit.result.cache
+*.xml.dist.bak
+
+#----------
+# Automatically generated from .gitattributes:
+#----------
+
+.git
+.editorconfig
+.gitattributes
+.distignore
+.github
+.gitignore
+.phpcsfixer.config.php
+.lintstagedrc.js
+.husky
+pnpm-lock.yaml
+package.json
+jsconfig.json
+composer.lock
+scoper.inc.php
+TODO
+php-scoper.phar
+scoped
+config
+TODO
+phpunit-wp.xml.dist
+phpunit.xml.dist
+tests
+.wp-env.json
+.nvmrc
+readme.md

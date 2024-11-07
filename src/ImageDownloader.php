@@ -6,14 +6,13 @@
 
 declare(strict_types=1);
 
-namespace Hirasso\ThumbhashPlaceholders;
+namespace Hirasso\WP\Placeholders;
 
-use WP_Error;
-use WP_Filesystem_Direct;
+use RuntimeException;
 
 class ImageDownloader
 {
-    private const DIR_NAME = 'thumbhash-placeholders';
+    private ?string $file = null;
 
     /**
      * Get the custom dir in /wp-content/uploads/
@@ -21,7 +20,7 @@ class ImageDownloader
     private static function getDir(): string
     {
         $uploadDir = wp_upload_dir();
-        $dir = $uploadDir['basedir'] . '/' . static::DIR_NAME;
+        $dir = $uploadDir['basedir'] . '/' . 'placeholders';
         if (!file_exists($dir)) {
             wp_mkdir_p($dir);
         }
@@ -31,43 +30,55 @@ class ImageDownloader
     /**
      * Download a remote image and save it to the custom directory.
      */
-    public static function downloadImage(string $url): string|WP_Error
+    public function download(string $url): string
     {
-        $dir = static::getDir();
         $response = wp_remote_get($url, ['timeout' => 300]);
 
-        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
-            return new WP_Error('download_failed', "Failed to download image: $url");
+        if (is_wp_error($response)) {
+            throw new RuntimeException(esc_html($response->get_error_message()));
         }
 
-        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
-        require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+        $responseCode = wp_remote_retrieve_response_code($response);
+        if ($responseCode !== 200) {
+            throw new RuntimeException(sprintf(
+                'Failed to download image. Response Code: %s',
+                esc_html($responseCode)
+            ));
+        }
 
-        $filesystem = new WP_Filesystem_Direct(true);
+        $fs = Utils::getFilesystem();
 
         $filename = uniqid() . '-' . basename($url);
-        $file = "$dir/$filename";
+        $file = static::getDir() . "/$filename";
         $fileContents = wp_remote_retrieve_body($response);
 
-        if ($filesystem->put_contents($file, $fileContents, FS_CHMOD_FILE) === false) {
-            return new WP_Error('could_not_write', "Failed to write file to directory: $dir");
+        if ($fs->put_contents($file, $fileContents, FS_CHMOD_FILE) === false) {
+            throw new RuntimeException('Failed to write file to uploads directory');
         }
 
+        $this->file = $file;
+
         return $file;
+    }
+
+    public function destroy()
+    {
+        if ($this->file) {
+            wp_delete_file($this->file);
+        }
     }
 
     /**
      * Cleans up (deletes) images in the custom directory that are older than one hour.
      */
-    public static function cleanupOldImages(int $before = MINUTE_IN_SECONDS): void
+    public static function cleanupTemporaryFiles(int $age = MINUTE_IN_SECONDS): void
     {
-        $dir = static::getDir();
-        $images = glob($dir . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
-        $oneHourAgo = time() - $before;
+        $files = list_files(static::getDir());
+        $before = time() - $age;
 
-        foreach ($images as $image) {
-            if (filemtime($image) < $oneHourAgo) {
-                wp_delete_file($image);
+        foreach ($files as $file) {
+            if (filemtime($file) < $before) {
+                wp_delete_file($file);
             }
         }
     }

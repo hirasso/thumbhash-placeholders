@@ -1,5 +1,6 @@
-Todo
-  - add wp cli utils
+Todo:
   - investigate changelog generation
-  - consider switching to https://github.com/softprops/action-gh-release
+    --> changesets?
+  - investigate switching to https://github.com/softprops/action-gh-release
+  - add action to publish to wp-org
   - test with git-updater
