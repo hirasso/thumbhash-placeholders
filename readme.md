@@ -83,7 +83,7 @@ Generate placeholders for all or selected images. Pass `--force` to re-generate.
 wp placeholders generate [<ids>...] [--force]
 ```
 
-### `thumbhashs clear`
+### `placeholders clear`
 
 Clear placeholders for all or selected images
 
