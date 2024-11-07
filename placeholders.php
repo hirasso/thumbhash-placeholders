@@ -9,7 +9,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name: ThumbHash Placeholders
+ * Plugin Name: Placeholders
  * Description: Generate image placeholders for smoother lazyloading 🎨
  * Version: 0.0.1
  * Requires PHP: 8.2
