@@ -36,15 +36,13 @@ jobs:
             echo "tag=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create scoped package
+      - name: Create package
         run: |
           composer scoped:create
 
-      - name: Zip scoped package
+      - name: Zip package
         run: |
-          mv scoped ${{ github.event.repository.name }}
           zip -r /tmp/${{ github.event.repository.name }}.zip ${{ github.event.repository.name }}
-          mv ${{ github.event.repository.name }} scoped
 
       - name: Debug information
         run: |
@@ -53,7 +51,7 @@ jobs:
           echo "Captured tag: ${{ steps.tag.outputs.tag }}"
           echo "Repo name: ${{ github.event.repository.name }}"
           echo "🧐 Scoped folder contents:"
-          cd scoped && ls -la
+          cd ${{ github.event.repository.name }} && ls -la
 
       # Upload the ZIP file as a release asset (only during release events)
       - name: Upload release asset
