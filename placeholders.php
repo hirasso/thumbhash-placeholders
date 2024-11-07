@@ -46,8 +46,21 @@ Plugin::init();
  * API functions
  */
 if (!function_exists('get_placeholder')) {
+    /**
+     * Get the plain Placeholder object
+     */
     function get_placeholder(int|WP_Post $post): ?Placeholder
     {
         return Plugin::getPlaceholder($post);
+    }
+}
+
+if (!function_exists('get_placeholder_image')) {
+    /**
+     * Get a full image element with the placeholder's data uri
+     */
+    function get_placeholder_image(int|WP_Post $post): ?string
+    {
+        return Plugin::getPlaceholderImage($post);
     }
 }

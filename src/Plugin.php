@@ -144,4 +144,20 @@ class Plugin
 
         return $uri;
     }
+
+    /**
+     * Get the full placeholder image for direct usage, for example:
+     *
+     * <img src="data:image/png;base64,iVBORw0KGg..." aria-hidden="true" alt="">
+     */
+    public static function getPlaceholderImage(int|WP_Post $post): ?string
+    {
+        if (!$placeholder = static::getPlaceholder($post)) {
+            return null;
+        }
+
+        $uri = esc_url($placeholder->dataURI);
+
+        return "<img src=\"$uri\" aria-hidden=\"true\" alt=\"\">";
+    }
 }
