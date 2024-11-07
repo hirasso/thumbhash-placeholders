@@ -54,11 +54,14 @@ class ComposerAction
     /**
      * Remove one or multiple folders or files
      */
-    public static function remove(...$args)
+    public static function remove(...$args): bool
     {
         $filesystem = new Filesystem();
         foreach ($args as $arg) {
-            $filesystem->remove($arg);
+            if (!$filesystem->remove($arg)) {
+                return false;
+            }
         }
+        return true;
     }
 }

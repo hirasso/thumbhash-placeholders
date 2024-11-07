@@ -46,11 +46,9 @@
       "wp i18n make-pot . languages/thumbhash-placeholders.pot"
     ],
     "plugin:check": [
-      "composer run-script scoped:create",
-      "rm -rf $(basename \"$(pwd)\")",
-      "mv build $(basename \"$(pwd)\")",
+      "composer scoped:create",
       "npx wp-env run cli wp plugin install plugin-check --activate",
-      "npx wp-env run cli wp plugin check wp-content/plugins/thumbhash-placeholders/thumbhash-placeholders"
+      "npx wp-env run cli wp plugin check thumbhash-placeholders"
     ],
     "plugin:dist-archive": [
       "rm -rf $(basename \"$(pwd)\").zip",
@@ -61,9 +59,12 @@
       "composer scoped:preprocess",
       "php php-scoper.phar add-prefix --force",
       "composer dump-autoload --working-dir build --classmap-authoritative",
+      "composer install",
       "composer scoped:postprocess"
     ],
-    "scoped:postprocess": "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess",
+    "scoped:postprocess": [
+      "Hirasso\\WP\\ComposerActions\\ScopedPackage::postProcess"
+    ],
     "scoped:preprocess": [
       "rm -rf vendor build $(basename \"$(pwd)\")",
       "curl -sLO https://github.com/humbug/php-scoper/releases/latest/download/php-scoper.phar",

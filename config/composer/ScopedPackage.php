@@ -30,11 +30,16 @@ class ScopedPackage extends ComposerAction
         /**
          * Cleanup stuff not required in the release
          */
-        static::remove(
+        $cleanedUp = static::remove(
             "$rootDir/build/composer.json",
             "$rootDir/build/composer.lock",
             "$rootDir/build/vendor/sniccowp/php-scoper-wordpress-excludes"
         );
+        if (!$cleanedUp) {
+            throw new Exception("Couldn't clean build folder");
+        }
+
+        $io->write("<info>✔︎ Cleaned up scoped folder</info>");
 
         /**
          * Rename scoped to whatever the root dir is called.
@@ -43,7 +48,7 @@ class ScopedPackage extends ComposerAction
         $newName = basename($rootDir);
         static::renameFolder("$rootDir/build", $newName);
 
-        $io->write("<info>Renamed scoped folder from 'build' top '$newName'!</info>");
+        $io->write("<info>✔︎ Renamed scoped folder from 'build' top '$newName'</info>");
 
         /**
          * Generate a scoped composer.json, without dependencies
@@ -53,7 +58,7 @@ class ScopedPackage extends ComposerAction
         $jsonFile = new JsonFile("$rootDir/$newName/composer.json");
         $jsonFile->write($composerJSON);
 
-        $io->write("<info>Created scoped composer.json!</info>");
+        $io->write("<info>✔︎ Created scoped composer.json</info>");
     }
 
     private static function generateScopedComposerJSON(IOInterface $io): array
