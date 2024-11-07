@@ -43,7 +43,7 @@ class ClearCommand extends Command
 
         $ids = $input->getRepeatingArgument('ids', []);
 
-        $io->title("Clearing ThumbHash Placeholders");
+        $io->title("Clearing Placeholders");
 
         $validator = new InputValidator($io);
         if (!$validator->isNumericArray($ids, "Non-numeric ids provided")) {

@@ -17,6 +17,7 @@
   "require-dev": {
     "ergebnis/composer-normalize": "dev-main",
     "friendsofphp/php-cs-fixer": "dev-master",
+    "snicco/better-wp-cli-testing": "dev-master",
     "symfony/var-dumper": "7.2.x-dev",
     "yoast/wp-test-utils": "^1.0@dev"
   },

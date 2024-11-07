@@ -1,4 +1,4 @@
-=== ThumbHash Placeholders ===
+=== Placeholders ===
 Contributors: nonverbla
 Tags: thumbhash, placeholder, lqip, blur, lazyload
 Tested up to: 6.6
@@ -9,7 +9,7 @@ Generate image placeholders for smoother lazyloading 🎨
 
 == Description ==
 
-**ThumbHash Placeholders** is a plugin that enhances lazy-loaded images by generating thumbhash placeholders for a better loading experience.
+**Placeholders** is a plugin that enhances lazy-loaded images by generating blurry placeholders for a better loading experience.
 
 == Installation ==
 

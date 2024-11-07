@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ad57dbcd8c85ac6cb918463b8907fba",
+    "content-hash": "cb216235a6a8d709d862c6e943af888b",
     "packages": [
         {
             "name": "psr/log",
@@ -3896,6 +3896,109 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "snicco/better-wp-cli-testing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/snicco/better-wp-cli-testing.git",
+                "reference": "b78cfef9ba94ac8b8b019ce6b3be4701a72d7e06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/snicco/better-wp-cli-testing/zipball/b78cfef9ba94ac8b8b019ce6b3be4701a72d7e06",
+                "reference": "b78cfef9ba94ac8b8b019ce6b3be4701a72d7e06",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0",
+                "phpunit/phpunit": "^9.5.13",
+                "snicco/better-wp-cli": "^1.10.1"
+            },
+            "conflict": {
+                "snicco/better-wp-api": "<1.10.1",
+                "snicco/better-wp-cache": "<1.10.1",
+                "snicco/better-wp-cache-bundle": "<1.10.1",
+                "snicco/better-wp-cli": "<1.2.1",
+                "snicco/better-wp-hooks": "<1.10.1",
+                "snicco/better-wp-hooks-bundle": "<1.10.1",
+                "snicco/better-wp-mail": "<1.10.1",
+                "snicco/better-wp-mail-bundle": "<1.10.1",
+                "snicco/better-wp-mail-testing": "<1.10.1",
+                "snicco/better-wpdb": "<1.10.1",
+                "snicco/better-wpdb-bundle": "<1.10.1",
+                "snicco/blade-bridge": "<1.10.1",
+                "snicco/blade-bundle": "<1.10.1",
+                "snicco/content-negotiation-middleware": "<1.10.1",
+                "snicco/debug-bundle": "<1.10.1",
+                "snicco/default-headers-middleware": "<1.10.1",
+                "snicco/eloquent": "<1.10.1",
+                "snicco/encryption-bundle": "<1.10.1",
+                "snicco/event-dispatcher": "<1.10.1",
+                "snicco/event-dispatcher-testing": "<1.10.1",
+                "snicco/guests-only-middleware": "<1.0.0",
+                "snicco/http-routing": "<1.10.1",
+                "snicco/http-routing-bundle": "<1.10.1",
+                "snicco/http-routing-testing": "<1.10.1",
+                "snicco/https-only-middleware": "<1.10.1",
+                "snicco/illuminate-container-bridge": "<1.10.1",
+                "snicco/kernel": "<1.10.1",
+                "snicco/kernel-testing": "<1.10.1",
+                "snicco/method-override-middleware": "<1.10.1",
+                "snicco/minimal-logger": "<1.10.1",
+                "snicco/must-match-route-middleware": "<1.10.1",
+                "snicco/no-robots-middleware": "<1.10.1",
+                "snicco/open-redirect-protection-middleware": "<1.10.1",
+                "snicco/payload-middleware": "<1.10.1",
+                "snicco/pimple-bridge": "<1.10.1",
+                "snicco/psr7-error-handler": "<1.10.1",
+                "snicco/redirect-middleware": "<1.10.1",
+                "snicco/session": "<1.10.1",
+                "snicco/session-bundle": "<1.10.1",
+                "snicco/session-psr16-bridge": "<1.10.1",
+                "snicco/session-testing": "<1.10.1",
+                "snicco/session-wp-bridge": "<1.10.1",
+                "snicco/share-cookies-middleware": "<1.10.1",
+                "snicco/signed-url": "<1.10.1",
+                "snicco/signed-url-psr15-bridge": "<1.10.1",
+                "snicco/signed-url-psr16-bridge": "<1.10.1",
+                "snicco/signed-url-testing": "<1.10.1",
+                "snicco/signed-url-wp-bridge": "<1.10.1",
+                "snicco/str-arr": "<1.10.1",
+                "snicco/templating": "<1.10.1",
+                "snicco/templating-bundle": "<1.10.1",
+                "snicco/testable-clock": "<1.10.1",
+                "snicco/testing-bundle": "<1.10.1",
+                "snicco/trailing-slash-middleware": "<1.10.1",
+                "snicco/wp-auth-only-middleware": "<1.10.1",
+                "snicco/wp-capability-middleware": "<1.10.1",
+                "snicco/wp-capapility-middleware": "<1.0.0",
+                "snicco/wp-guests-only-middleware": "<1.10.1",
+                "snicco/wp-nonce-middleware": "<1.10.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Snicco\\Component\\BetterWPCLI\\Testing\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Calvin Alkan",
+                    "email": "calvin@snicco.de"
+                }
+            ],
+            "description": "Provides test utilities for snicco/better-wp-cli",
+            "support": {
+                "source": "https://github.com/snicco/better-wp-cli-testing/tree/v1.10.1"
+            },
+            "time": "2024-09-03T19:21:48+00:00"
         },
         {
             "name": "symfony/console",

@@ -71,14 +71,14 @@ class ImageDownloader
     /**
      * Cleans up (deletes) images in the custom directory that are older than one hour.
      */
-    public static function cleanupOldImages(int $age = MINUTE_IN_SECONDS): void
+    public static function cleanupTemporaryFiles(int $age = MINUTE_IN_SECONDS): void
     {
-        $images = glob(static::getDir() . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
+        $files = list_files(static::getDir());
         $before = time() - $age;
 
-        foreach ($images as $image) {
-            if (filemtime($image) < $before) {
-                wp_delete_file($image);
+        foreach ($files as $file) {
+            if (filemtime($file) < $before) {
+                wp_delete_file($file);
             }
         }
     }

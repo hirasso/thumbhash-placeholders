@@ -53,7 +53,7 @@ class GenerateCommand extends Command
         $ids = $input->getRepeatingArgument('ids', []);
         $force = $input->getFlag('force');
 
-        $io->title("Generating ThumbHash Placeholders");
+        $io->title("Generating Placeholders");
 
         $validator = new InputValidator($io);
         if (!$validator->isNumericArray($ids, "Non-numeric ids provided")) {
@@ -82,7 +82,7 @@ class GenerateCommand extends Command
 
         $query = new WP_Query($queryArgs);
 
-        ImageDownloader::cleanupOldImages();
+        ImageDownloader::cleanupTemporaryFiles();
 
         if (!$query->have_posts()) {
             $io->success("No images without placeholders found");
