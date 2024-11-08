@@ -1,6 +1,0 @@
-Todo:
-  - investigate changelog generation
-    --> changesets?
-  - investigate switching to https://github.com/softprops/action-gh-release
-  - add action to publish to wp-org
-  - test with git-updater

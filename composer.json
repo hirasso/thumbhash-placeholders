@@ -86,13 +86,13 @@
       "npx wp-env run tests-cli --env-cwd=wp-content/plugins/placeholders composer test:wp && composer test:unit"
     ],
     "test:unit": [
-      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage"
+      "@php ./vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml.dist --no-coverage"
     ],
     "test:watch": [
       "ls tests/**/*.php | entr composer test"
     ],
     "test:wp": [
-      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
+      "@php ./vendor/phpunit/phpunit/phpunit -c tests/phpunit-wp.xml.dist --no-coverage"
     ],
     "wp-env:start": [
       "npx wp-env start"

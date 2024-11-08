@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky",
     "format:assets": "npx prettier --write '**/*.{js,css}'",
-    "format:php": "vendor/bin/php-cs-fixer fix --config .phpcsfixer.config.php --allow-risky=yes",
+    "format:php": "vendor/bin/php-cs-fixer fix --config config/phpcsfixer.config.php --allow-risky=yes",
     "version:prepare": "pnpm changeset version && pnpm version:patch",
     "version:patch": "node config/scripts/patchVersion.js $(basename \"$(pwd)\").php readme.txt",
     "wp-env": "wp-env"
