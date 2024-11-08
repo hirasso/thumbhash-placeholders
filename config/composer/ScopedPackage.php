@@ -62,8 +62,8 @@ class ScopedPackage extends ComposerAction
          * `my-plugin/scoped` will become `my-plugin/my-plugin`
          */
         $newName = basename($rootDir);
-        // static::renameFolder("$rootDir/build", $newName);
-        // $io->write("<info>✔︎ Renamed scoped folder from 'build' top '$newName'</info>");
+        static::renameFolder("$rootDir/build", $newName);
+        $io->write("<info>✔︎ Renamed scoped folder from 'build' top '$newName'</info>");
     }
 
     /**
