@@ -3,7 +3,7 @@ Contributors: nonverbla
 Tags: thumbhash, placeholder, lqip, blur, lazyload
 Tested up to: 6.6
 License: GPL-3.0-or-later
-Stable Tag: 0.0.2
+Stable Tag: 0.0.3
 
 Generate image placeholders for smoother lazyloading 🎨
 
