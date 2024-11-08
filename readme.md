@@ -24,9 +24,39 @@ wp plugin activate placeholders
 
 ## Usage
 
-### Data Structure
+### Markup
 
-Access the placeholder in your templates:
+```php
+<figure>
+  <figure>
+    <?php if (function_exists('get_placeholder_image')): ?>
+      <?php echo get_placeholder_image($attachment_id) ?>
+    <?php endif; ?>
+    <?php echo wp_get_attachment_image($attachment_id) ?>
+  </figure>
+</figure>
+```
+
+### Styling
+
+```css
+figure,
+figure img {
+  position: relative;
+}
+figure img[data-placeholder-image] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+```
+
+### Placeholder object
+
+You can also access the raw placeholder object if you need more control:
 
 ```php
 $placeholder = get_placeholder($id);
@@ -40,36 +70,6 @@ object(Hirasso\WP\Placeholders\Placeholder)#2491 (1) {
   string(4218) "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAXCAYAAABqBU3hAAAMEElEQVR4AQCBAH7..."
   ["hash"]=>
   string(28) "GwgOBYAJdaaGeIi..."
-}
-```
-
-### Markup
-
-```php
-<figure>
-  <figure>
-    <?php if (function_exists('get_placeholder')): ?>
-      <img src="<?php echo get_placeholder($id)?->dataURI ?>" aria-hidden="true" alt="">
-    <?php endif; ?>
-    <?php echo wp_get_attachment_image($id) ?>
-  </figure>
-</figure>
-```
-
-### Styling
-
-```css
-figure,
-figure img {
-  position: relative;
-}
-figure img[aria-hidden="true"] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 ```
 

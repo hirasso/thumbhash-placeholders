@@ -150,14 +150,18 @@ class Plugin
      *
      * <img src="data:image/png;base64,iVBORw0KGg..." aria-hidden="true" alt="">
      */
-    public static function getPlaceholderImage(int|WP_Post $post): ?string
-    {
+    public static function getPlaceholderImage(
+        int|WP_Post $post,
+        string $className = ''
+    ): ?string {
         if (!$placeholder = static::getPlaceholder($post)) {
             return null;
         }
 
-        $uri = esc_url($placeholder->dataURI);
-
-        return "<img src=\"$uri\" aria-hidden=\"true\" alt=\"\">";
+        return sprintf(
+            '<img data-placeholder-image class="%2$s" src="%1$s" aria-hidden="true" alt="">',
+            esc_url($placeholder->dataURI, ['data']),
+            esc_attr($className)
+        );
     }
 }

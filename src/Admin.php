@@ -65,18 +65,13 @@ class Admin
      */
     private static function renderAttachmentField(int $id, AdminContext $context): string
     {
-        $thumbhashURL = Plugin::getPlaceholder($id)?->dataURI ?: '';
-        $buttonLabel = $thumbhashURL ? __('Regenerate', 'placeholders') : __('Generate', 'placeholders');
+        $placeholderImage = Plugin::getPlaceholderImage($id);
+        $buttonLabel = !!$placeholderImage ? __('Regenerate', 'placeholders') : __('Generate', 'placeholders');
 
         ob_start() ?>
 
         <placeholders-field data-id="<?= esc_attr($id) ?>">
-            <?php if ($thumbhashURL): ?>
-                <img
-                    class="placeholders_image"
-                    src="<?php echo esc_attr($thumbhashURL) ?>"
-                    alt="<?php esc_attr_e('Thumbhash placeholder', 'placeholders') ?>">
-            <?php endif; ?>
+            <?= $placeholderImage ?>
 
             <button
                 data-placeholders-generate

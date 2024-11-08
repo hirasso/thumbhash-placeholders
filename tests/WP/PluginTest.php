@@ -87,4 +87,22 @@ final class PluginTest extends WPTestCase
             $placeholder->hash
         );
     }
+
+    /**
+     * Test getPlaceholderImage
+     *
+     * @covers ::getPlaceholderImage
+     */
+    public function test_getPlaceholderImage()
+    {
+        $attachmentID = $this->factory()->attachment->create_upload_object(
+            Plugin::getAssetPath(FIXTURES_ORIGINAL_IMAGE)
+        );
+
+        $this->assertIsInt($attachmentID);
+
+        $image = Plugin::getPlaceholderImage($attachmentID);
+
+        $this->assertEquals(FIXTURES_EXPECTED_PLACEHOLDER_IMAGE, $image);
+    }
 }
