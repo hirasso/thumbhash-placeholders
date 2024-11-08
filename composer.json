@@ -16,6 +16,7 @@
     "srwiez/thumbhash": "dev-master"
   },
   "extra": {
+    "from-dist": true,
     "patch-scoped": {
       "prefix": "HirassoScoped",
       "namespaces": [
