@@ -144,4 +144,24 @@ class Plugin
 
         return $uri;
     }
+
+    /**
+     * Get the full placeholder image for direct usage, for example:
+     *
+     * <img src="data:image/png;base64,iVBORw0KGg..." aria-hidden="true" alt="">
+     */
+    public static function getPlaceholderImage(
+        int|WP_Post $post,
+        string $className = ''
+    ): ?string {
+        if (!$placeholder = static::getPlaceholder($post)) {
+            return null;
+        }
+
+        return sprintf(
+            '<img data-placeholder-image class="%2$s" src="%1$s" aria-hidden="true" alt="">',
+            esc_url($placeholder->dataURI, ['data']),
+            esc_attr($className)
+        );
+    }
 }
