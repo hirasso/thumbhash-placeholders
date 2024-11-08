@@ -1,6 +1,6 @@
 {
   "name": "hirasso/placeholders",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A WordPress plugin to enhance your lazy-loaded images with blurry placeholders",
   "license": "GPL-3.0-or-later",
   "type": "wordpress-plugin",
