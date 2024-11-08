@@ -2,8 +2,10 @@
 
 namespace Hirasso\WP\ComposerActions;
 
+use Composer\Json\JsonFile;
 use Composer\Script\Event;
 use Composer\Util\Filesystem;
+use Exception;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
@@ -39,6 +41,22 @@ class ComposerAction
         $composer = $event->getComposer();
         $rootDir = $composer->getConfig()->get('vendor-dir');
         return dirname($rootDir);
+    }
+
+    /**
+     * Get the contents of a composer.json
+     */
+    protected static function getComposerJSON(string $dir)
+    {
+        $filePath = "$dir/composer.json";
+
+        if (!file_exists($filePath)) {
+            throw new Exception('composer.json not found at root directory');
+        }
+
+        // Load the composer.json
+        $jsonFile = new JsonFile($filePath);
+        return $jsonFile->read();
     }
 
     /**

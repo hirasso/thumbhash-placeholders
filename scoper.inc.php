@@ -66,7 +66,7 @@ return [
     //
     // For more see: https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#finders-and-paths
     'finders' => [
-        Finder::create()->files()->in('./src'),
+        // Finder::create()->files()->in('./src'),
         // Finder::create()->files()->in('./vendor')->name('autoload.php'),
         Finder::create()
             ->files()

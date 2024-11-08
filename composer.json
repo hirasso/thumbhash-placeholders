@@ -14,6 +14,15 @@
     "sniccowp/php-scoper-wordpress-excludes": "dev-master",
     "srwiez/thumbhash": "dev-master"
   },
+  "extra": {
+    "patch-scoped": {
+      "prefix": "HirassoScoped",
+      "namespaces": [
+        "Thumbhash",
+        "Snicco"
+      ]
+    }
+  },
   "require-dev": {
     "ergebnis/composer-normalize": "dev-main",
     "friendsofphp/php-cs-fixer": "dev-master",
