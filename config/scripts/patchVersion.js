@@ -28,10 +28,28 @@ function patchVersion(fileName, version) {
   const filePath = path.join(process.cwd(), fileName);
 
   let file = fs.readFileSync(filePath, "utf8");
+
   // Update version in a PHP file
-  file = file.replace(/Version:\s*\d+\.\d+\.\d+/, `Version: ${version}`);
+  if (fileName.endsWith(".php")) {
+    file = file.replace(/Version:\s*\d+\.\d+\.\d+/, `Version: ${version}`);
+  }
+
   // Update version in a readme.txt file
-  file = file.replace(/Stable Tag:\s*\d+\.\d+\.\d+/, `Stable Tag: ${version}`);
+  if (fileName === "readme.txt") {
+    file = file.replace(
+      /Stable Tag:\s*\d+\.\d+\.\d+/,
+      `Stable Tag: ${version}`,
+    );
+  }
+
+  // Update version in a composer.json file
+  if (fileName === "composer.json") {
+    file = file.replace(
+      /"version":\s+"\d+\.\d+\.\d+",/,
+      `"version": "${version}",`,
+    );
+  }
+
   // Write the file
   fs.writeFileSync(filePath, file, "utf8");
 

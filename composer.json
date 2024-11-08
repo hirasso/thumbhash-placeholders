@@ -1,5 +1,6 @@
 {
   "name": "hirasso/placeholders",
+  "version": "0.0.2",
   "description": "A WordPress plugin to enhance your lazy-loaded images with blurry placeholders",
   "license": "GPL-3.0-or-later",
   "type": "wordpress-plugin",
@@ -13,6 +14,15 @@
     "snicco/better-wp-cli": "^1.2",
     "sniccowp/php-scoper-wordpress-excludes": "dev-master",
     "srwiez/thumbhash": "dev-master"
+  },
+  "extra": {
+    "patch-scoped": {
+      "prefix": "HirassoScoped",
+      "namespaces": [
+        "Thumbhash",
+        "Snicco"
+      ]
+    }
   },
   "require-dev": {
     "ergebnis/composer-normalize": "dev-main",
@@ -77,13 +87,13 @@
       "npx wp-env run tests-cli --env-cwd=wp-content/plugins/placeholders composer test:wp && composer test:unit"
     ],
     "test:unit": [
-      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage"
+      "@php ./vendor/phpunit/phpunit/phpunit -c tests/phpunit.xml.dist --no-coverage"
     ],
     "test:watch": [
       "ls tests/**/*.php | entr composer test"
     ],
     "test:wp": [
-      "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
+      "@php ./vendor/phpunit/phpunit/phpunit -c tests/phpunit-wp.xml.dist --no-coverage"
     ],
     "wp-env:start": [
       "npx wp-env start"
