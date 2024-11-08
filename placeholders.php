@@ -11,7 +11,7 @@
  * @wordpress-plugin
  * Plugin Name: Placeholders
  * Description: Generate image placeholders for smoother lazyloading 🎨
- * Version: 0.0.1
+ * Version: 0.0.2
  * Requires PHP: 8.2
  * Requires at least: 5.8
  * Tested up to: 6.6
